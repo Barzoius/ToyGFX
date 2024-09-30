@@ -3,7 +3,7 @@
 
 VertexArray::VertexArray()
 {
-    glGenVertexArrays(1, &VAO);
+    glGenVertexArrays(1, &ID);
 }
 
 
@@ -15,7 +15,8 @@ VertexArray::~VertexArray()
 
 void VertexArray::Bind()
 {
-    glBindVertexArray(VAO);
+    glBindVertexArray(ID);
+
 }
 
 
@@ -31,7 +32,7 @@ void VertexArray::LinkVertexBuff(VertexBuffer vb)
 
 
 
-GLuint VertexArray::GetVAO()
+GLuint VertexArray::GetID()
 {
-    return VAO;
+    return ID;
 }

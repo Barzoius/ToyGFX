@@ -15,7 +15,7 @@ public:
 
     void LinkVertexBuff(VertexBuffer vb);
 
-    GLuint GetVAO();
+    GLuint GetID();
 private:
-    GLuint VAO;
+    GLuint ID;
 };

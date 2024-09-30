@@ -3,6 +3,9 @@
 
 #include "VertexBuffer.h"
 #include "VertexArray.h"
+#include "ElementBuffer.h"
+
+#include "glm\common.hpp"
 
 Application::Application()
 {
@@ -22,19 +25,34 @@ Application::Application()
 
     std::vector<float> vertices = {
         // positions         // colors
-        0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 1.0f,  // bottom right
-       -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // bottom left
-        0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   // top 
+        0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 1.0f,  // bottom right
+        0.5f, -0.5f, 0.0f,  0.543f, 1.0f, 0.0f,  // bottom left
+        -0.5f,  -0.5f, 0.0f,  0.0f, 0.23f, 1.0f,   // top 
+        -0.5f,  0.5f, 0.0f,  0.0f, 0.65f, 0.0f
     };
+
+    std::vector<unsigned int> indices = {
+        0, 1, 3,
+        1, 2, 3
+    };
+
+
+    ElementBuffer EB(indices);
+   
 
     VertexArray VA;
     VA.Bind();
 
     VertexBuffer VB(vertices);
 
+
     VA.LinkVertexBuff(VB);
+
+    EB.Bind();
+
+    EBO = EB.GetID();
     
-    VAO = VA.GetVAO();
+    VAO = VA.GetID();
 
 
 }
@@ -55,19 +73,14 @@ void Application::Run()
 
         mWindow->ProcessInput();
 
-
-
         glClearColor(0.91f, 0.64f, 0.09f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         shaderProgram -> use();
         glBindVertexArray(VAO);
        
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-       /* float fov = 45.0f;
-        glm::mat4 projection = glm::perspective(glm::radians(fov), 
-            (float)mWindow -> GetHeight() / (float)mWindow->GetWidth(), 0.1f, 100.0f);*/
 
         mWindow->OnUpdate();
     }

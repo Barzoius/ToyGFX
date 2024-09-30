@@ -14,6 +14,6 @@ public:
 
 
 private:
-    GLuint VBO;
+    GLuint ID;
     std::vector<float> mVertices;
 };
