@@ -5,7 +5,12 @@
 #include "VertexArray.h"
 #include "ElementBuffer.h"
 
+#include <assimp\Importer.hpp>
+#include <assimp\scene.h>
+#include <assimp\postprocess.h>
+
 #include "glm\common.hpp"
+
 
 Application::Application()
 {
@@ -15,6 +20,10 @@ Application::Application()
     {
         std::cout << "GLAD FAILED";
     }
+
+    Assimp::Importer imp;
+    auto model = imp.ReadFile("Resources\\Models\\suzanne.obj",
+                              aiProcess_Triangulate | aiProcess_JoinIdenticalVertices);
 
     shaderProgram = std::make_unique<ShaderSuite>(std::initializer_list<std::pair<std::string_view, Shader::ShaderType>>{
         {"Shaders/VertShader.glsl", Shader::ShaderType::VERTEX},
