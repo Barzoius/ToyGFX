@@ -9,7 +9,7 @@
 
 Application::Application()
 {
-    mWindow = std::make_unique<Window>(800, 600 , "TERRAIN_GENERATION");
+    mWindow = std::make_unique<Window>(800, 600 , "TOY_GFX");
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
@@ -19,9 +19,9 @@ Application::Application()
     shaderProgram = std::make_unique<ShaderSuite>(std::initializer_list<std::pair<std::string_view, Shader::ShaderType>>{
         {"Shaders/VertShader.glsl", Shader::ShaderType::VERTEX},
         { "Shaders/FragShader.glsl", Shader::ShaderType::FRAGMENT },
+        { "Shaders/FragShader.glsl", Shader::ShaderType::FRAGMENT },
     });
-
-    std::cout<<shaderProgram -> GetID();
+ 
 
     std::vector<float> vertices = {
         // positions         // colors

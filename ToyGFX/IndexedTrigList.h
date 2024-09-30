@@ -26,7 +26,7 @@ public:
             const glm::vec3 pos = vertex.pos;
         }
     }
-private:
+public:
     std::vector<VERTEX> vertices;
     std::vector<unsigned short> indices;
 };

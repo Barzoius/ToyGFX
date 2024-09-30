@@ -1,7 +1,10 @@
 #include "ElementBuffer.h"
 
 ElementBuffer::ElementBuffer(std::vector<unsigned int>& indices)
-    : indices(indices)
+    : 
+    indices(indices),
+    mIndiciesCount(indices.size())
+      
 {
     glGenBuffers(1, &ID);
 }
@@ -29,5 +32,10 @@ void ElementBuffer::DrawIndexed()
 GLuint ElementBuffer::GetID()
 {
     return ID;
+}
+
+int ElementBuffer::GetIndiciesCount()
+{
+    return mIndiciesCount;
 }
 

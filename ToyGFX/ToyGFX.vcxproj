@@ -133,11 +133,13 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Drawables.cpp" />
     <ClCompile Include="ElementBuffer.cpp" />
     <ClCompile Include="InputDevices.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Shaders\Shader.cpp" />
     <ClCompile Include="Surface.cpp" />
+    <ClCompile Include="TestPlane.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
@@ -146,18 +148,27 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Bindable.h" />
+    <ClInclude Include="BindableObjects.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Cube.h" />
+    <ClInclude Include="Drawable.h" />
     <ClInclude Include="ElementBuffer.h" />
     <ClInclude Include="IndexedTrigList.h" />
     <ClInclude Include="InputDevices.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="Shaders\Shader.h" />
     <ClInclude Include="Surface.h" />
+    <ClInclude Include="TestBox.h" />
+    <ClInclude Include="TestPlane.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Geom.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -19,6 +19,15 @@
     <Filter Include="Header Files\Bindables">
       <UniqueIdentifier>{f665c41d-6479-4029-a0c0-b3cb996b4faa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Primitives">
+      <UniqueIdentifier>{4714d91b-90b0-4a39-8436-34222ce7ed6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Drawables">
+      <UniqueIdentifier>{67c6b8c7-62d6-44ab-921e-4e682b7cdd27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Drawables">
+      <UniqueIdentifier>{c513e8a5-d0e7-4de2-8ed3-d06b5fd29ca8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -53,6 +62,12 @@
     </ClCompile>
     <ClCompile Include="ElementBuffer.cpp">
       <Filter>Source Files\Bindables</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPlane.cpp">
+      <Filter>Source Files\Drawables</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,5 +113,26 @@
     <ClInclude Include="ElementBuffer.h">
       <Filter>Header Files\Bindables</Filter>
     </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Header Files\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="TestBox.h">
+      <Filter>Header Files\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable.h">
+      <Filter>Header Files\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="TestPlane.h">
+      <Filter>Header Files\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="BindableObjects.h">
+      <Filter>Header Files\Bindables</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Geom.glsl" />
   </ItemGroup>
 </Project>
