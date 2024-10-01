@@ -35,15 +35,29 @@ public:
     void processMouseInput();
     void processMouseWheelInput();
 
+    glm::mat4x4 GetViewMatrix()
+    {
+        return glm::mat4x4( U.x, U.y, U.z, -camPosition.x,
+                            V.x, V.y, V.z, -camPosition.y, 
+                            N.x, N.y, N.z, -camPosition.z, 
+                            0.0f, 0.0f, 0.0f, 1.0f );
+    }
+
 private:
-    glm::vec3 camPosition = glm::vec3(0.0f, 0.0f, 0.3f);
-    glm::vec3 camTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 camPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 camTarget = glm::vec3(0.0f, 0.0f, 1.0f);
+    glm::vec3 camUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
     glm::vec3 camZ = glm::normalize(camPosition - camTarget); //FRONT
     glm::vec3 camX = glm::normalize(glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), camZ)); //RIGHT
     glm::vec3 camY = glm::cross(camZ, camX); // UP
     glm::vec3 WorldUp;
 
-    glm::vec4 view;
+    glm::vec3 U = glm::vec3(1.0f, 0.0f, 0.0f);
+    glm::vec3 V = glm::vec3(0.0f, 1.0f, 0.0f);
+    glm::vec3 N = glm::vec3(0.0f, 0.0f, 1.0f);
+
+    glm::mat4x4 ViewMatrix;
 
     const float yaw = -90.0f;
     const float pitch = 0.0f;

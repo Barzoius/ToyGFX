@@ -27,6 +27,7 @@ private:
     Camera camera;
     Timer timer;
 
+
     unsigned int VBO, VAO, EBO;
 
     std::unique_ptr<ShaderSuite> shaderProgram{};

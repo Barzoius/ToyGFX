@@ -1,3 +1,7 @@
+#include "imgui\imgui.h"
+#include "imgui\imgui_impl_glfw.h"
+#include "imgui\imgui_impl_opengl3.h"
+
 #include "Application.h"
 #include "iostream"
 
@@ -76,6 +80,13 @@ Application::~Application()
 
 void Application::Run()
 {
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+    ImGui_ImplGlfw_InitForOpenGL(mWindow -> GetWindow(), true);
+    ImGui_ImplOpenGL3_Init("#version 330");
+
 
     while (!glfwWindowShouldClose(mWindow->GetWindow()))
     {
@@ -85,11 +96,27 @@ void Application::Run()
         glClearColor(0.91f, 0.64f, 0.09f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
         shaderProgram -> use();
-        glBindVertexArray(VAO);
        
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
+        float size; 
+        float color[4] = { 0.8f, 0.3f, 0.02f, 1.0f };
+        ImGui::Begin("IMGUI");
+        ImGui::Text("IMGUI MSG");
+
+        ImGui::SliderFloat("Size", &size, 0.5f, 2.0f);
+
+        ImGui::ColorEdit4("Color", color);
+
+        ImGui::End();
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         mWindow->OnUpdate();
     }
