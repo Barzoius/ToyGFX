@@ -4,31 +4,47 @@
 
 #include <vector>
 
-#include "glm\common.hpp"
-#include "glm\glm.hpp"
+#include "glm/glm.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 
+
+template<typename VERTEX>
 class VertexBuffer : public Bindable
 {
 public:
-    template <typename VERTEX>
-    VertexBuffer(std::vector<VERTEX>& vertices)
-        //:
-        //mVertices(vertices)
+    VertexBuffer(const std::vector<VERTEX>& vertices)
+        : sizeVERTEX(sizeof(VERTEX))
     {
         mVertices.reserve(vertices.size());
+
         for (const auto& vertex : vertices)
         {
-            mVertices.push_back(vertex.pos);  // Assuming VERTEX has a glm::vec3 'pos' field
+            mVertices.push_back(vertex);  
         }
+
         glGenBuffers(1, &ID);
     }
-    ~VertexBuffer();
 
-    void Bind() override;
+    ~VertexBuffer() = default;
 
+   // void Bind() override;
+
+    void Bind()
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, ID);
+        glBufferData(GL_ARRAY_BUFFER, mVertices.size() * sizeVERTEX, mVertices.data(), GL_STATIC_DRAW);
+    }
+
+    //size_t GetVertexSize() const;
+
+
+    size_t GetVertexSize() const
+    {
+        return sizeVERTEX;
+    }
 
 private:
     GLuint ID;
-    std::vector<glm::vec3> mVertices;
+    size_t sizeVERTEX;
+    std::vector<VERTEX> mVertices; 
 };

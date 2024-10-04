@@ -48,6 +48,8 @@ void Window::Init(int width, int height, const char* name)
 
     //glfwSetKeyCallback(this->GetWindow(), key_callback);
 
+    
+
 }
 
 void Window::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)

@@ -15,7 +15,7 @@ TestSquare::TestSquare()
 
     auto model = Square::Make<VERTEX>();
 
-    AddBind(std::make_unique<VertexBuffer>(model.vertices));           // vertices
+    AddBind(std::make_unique<VertexBuffer<VERTEX>>(model.vertices));           // vertices
     AddBind(std::make_unique<VertexArray>());
 
     AddElementBuffer(std::make_unique<ElementBuffer>(model.indices));  // indices

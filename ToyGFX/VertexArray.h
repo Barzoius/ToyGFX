@@ -13,7 +13,7 @@ public:
 
     void Bind() override;
 
-    void LinkVertexBuff(VertexBuffer vb);
+   // void LinkVertexBuff(VertexBuffer vb);
 
     GLuint GetID();
 private:

@@ -18,7 +18,6 @@ void Drawable::Draw() const noexcept
         b->Bind();
     }
 
-
     glDrawElements(GL_TRIANGLES, (GLsizei)pElemBuffer->GetIndiciesCount(), GL_UNSIGNED_INT, 0);
 
 }

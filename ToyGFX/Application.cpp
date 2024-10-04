@@ -11,12 +11,14 @@
 
 
 #include "TestSquare.h"
+#include "TestBox.h"
 
 
 
 Application::Application()
 {
     mWindow = std::make_unique<Window>(800, 600 , "TOY_GFX");
+
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
@@ -95,6 +97,8 @@ void Application::Run()
 
     TestSquare test;
 
+    //TestBox box(1.0f);
+
     while (!glfwWindowShouldClose(mWindow->GetWindow()))
     {
 
@@ -108,8 +112,10 @@ void Application::Run()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-      
         test.Draw();
+        //box.Draw();
+      
+        //test.Draw();
         //glm::mat4 projection = glm::perspective(glm::radians(mWindow->mCamera.zoom), (float)mWindow->GetWidth() / (float)mWindow ->  GetHeight(), 0.1f, 100.0f);
 
         //shaderProgram->setMat4("projection", projection);
