@@ -1,6 +1,8 @@
 #include "InputDevices.h"
 #include "Window.h"
 
+#include <iostream>
+
 namespace InputDevices
 {
 
@@ -37,7 +39,7 @@ namespace InputDevices
 
             if (key == GLFW_KEY_Q) // UP
             {
-
+                std::cout << "E";
             }
 
             if (key == GLFW_KEY_E) // DOWN

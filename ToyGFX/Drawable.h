@@ -7,8 +7,9 @@
 #include "glm\glm.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "Shaders\Shader.h"
 class Bindable;
-class ShaderSuite;
+
 
 class Drawable
 {
@@ -19,15 +20,18 @@ public:
 
     void Draw() const noexcept;
 
-    virtual glm::mat4x4 GetTransform() const noexcept = 0;
-    virtual void Update() noexcept = 0;
+    virtual glm::mat4x4 GetTransformMatrix() const noexcept = 0;
+    //virtual void Update() noexcept = 0;
+
+    ShaderSuite* GetShader() const noexcept;
 
 protected:
     void AddBind(std::unique_ptr<Bindable>) noexcept;
     void AddElementBuffer(std::unique_ptr<class ElementBuffer>) noexcept;
+    void AddShaderProgram(std::unique_ptr<ShaderSuite>) noexcept;
 
 private:
-    const class ShaderSuite* pShaderProgram = nullptr;
+    std::unique_ptr<class ShaderSuite> pShaderProgram;
     const class ElementBuffer* pElemBuffer = nullptr;
 
     std::vector<std::unique_ptr<Bindable>> bindables;

@@ -22,15 +22,15 @@ public:
         vertices.emplace_back(-side, side, side);
         vertices.emplace_back(side, side, side);
 
-        std::vector<V> verts(vertices.size());
+        //std::vector<VERTEX> verts(vertices.size());
 
-        for (size_t i = 0; i < vertices.size(); i++)
-        {
-            verts[i].pos = vertices[i];
-        }
+        //for (size_t i = 0; i < vertices.size(); i++)
+        //{
+        //    verts[i].pos = vertices[i];
+        //}
 
         return{
-            std::move(verts),{
+            std::move(vertices),{
                 0,2,1, 2,3,1,
                 1,3,5, 3,7,5,
                 2,6,3, 3,6,7,

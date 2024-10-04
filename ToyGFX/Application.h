@@ -5,6 +5,12 @@
 
 #include "memory"
 
+#include "Perspective.h"
+
+#include "InputDevices.h"
+
+
+
 class Application
 {
 public:
@@ -17,9 +23,7 @@ public:
     bool OnWindowClose();
 
     inline Window* GetWindow() { return mWindow.get(); }
-
     
-
 private:
     std::unique_ptr<Window> mWindow;
     bool mIsRunning = true;
@@ -27,8 +31,8 @@ private:
     Camera camera;
     Timer timer;
 
+   // Projection proj;
 
-    unsigned int VBO, VAO, EBO;
-
+    
     std::unique_ptr<ShaderSuite> shaderProgram{};
 };

@@ -9,11 +9,9 @@
 #include "VertexArray.h"
 #include "ElementBuffer.h"
 
-#include <assimp\Importer.hpp>
-#include <assimp\scene.h>
-#include <assimp\postprocess.h>
 
-#include "glm\common.hpp"
+#include "TestSquare.h"
+
 
 
 Application::Application()
@@ -25,16 +23,13 @@ Application::Application()
         std::cout << "GLAD FAILED";
     }
 
-    Assimp::Importer imp;
-    auto model = imp.ReadFile("Resources\\Models\\suzanne.obj",
-                              aiProcess_Triangulate | aiProcess_JoinIdenticalVertices);
 
-    shaderProgram = std::make_unique<ShaderSuite>(std::initializer_list<std::pair<std::string_view, Shader::ShaderType>>{
-        {"Shaders/VertShader.glsl", Shader::ShaderType::VERTEX},
-        { "Shaders/FragShader.glsl", Shader::ShaderType::FRAGMENT },
-        { "Shaders/FragShader.glsl", Shader::ShaderType::FRAGMENT },
-    });
- 
+
+    //shaderProgram = std::make_unique<ShaderSuite>(std::initializer_list<std::pair<std::string_view, Shader::ShaderType>>{
+    //    {"Shaders/VertShader.glsl", Shader::ShaderType::VERTEX},
+    //    { "Shaders/FragShader.glsl", Shader::ShaderType::FRAGMENT }
+    //});
+
 
     std::vector<float> vertices = {
         // positions         // colors
@@ -50,30 +45,41 @@ Application::Application()
     };
 
 
-    ElementBuffer EB(indices);
+    //ElementBuffer EB(indices);
    
 
-    VertexArray VA;
-    VA.Bind();
-
-    VertexBuffer VB(vertices);
-
-
-    VA.LinkVertexBuff(VB);
-
-    EB.Bind();
-
-    EBO = EB.GetID();
+    //VertexArray VA;
     
-    VAO = VA.GetID();
+
+    //VertexBuffer VB(vertices);
+
+   // VB.Bind();
+    //VA.Bind();
+
+    //EB.Bind();
 
 
 }
 
 Application::~Application()
 {
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+   // glDeleteVertexArrays(1, &VAO);
+   // glDeleteBuffers(1, &VBO);
+
+}
+
+void Application::OnEvent()
+{
+    if (glfwGetKey(mWindow -> GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
+        glfwSetWindowShouldClose(mWindow -> GetWindow(), true);
+    }
+
+    if (glfwGetKey(mWindow->GetWindow(), GLFW_KEY_E) == GLFW_PRESS)
+    {
+        //glfwSetWindowShouldClose(mWindow->GetWindow(), true);
+        std::cout << "E";
+    }
 
 }
 
@@ -87,11 +93,13 @@ void Application::Run()
     ImGui_ImplGlfw_InitForOpenGL(mWindow -> GetWindow(), true);
     ImGui_ImplOpenGL3_Init("#version 330");
 
+    TestSquare test;
 
     while (!glfwWindowShouldClose(mWindow->GetWindow()))
     {
 
         mWindow->ProcessInput();
+   
 
         glClearColor(0.91f, 0.64f, 0.09f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -100,9 +108,18 @@ void Application::Run()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        shaderProgram -> use();
+      
+        test.Draw();
+        //glm::mat4 projection = glm::perspective(glm::radians(mWindow->mCamera.zoom), (float)mWindow->GetWidth() / (float)mWindow ->  GetHeight(), 0.1f, 100.0f);
+
+        //shaderProgram->setMat4("projection", projection);
+
+        //glm::mat4 view = mWindow->mCamera.GetViewMatrix();
+
+        //shaderProgram->setMat4("view", view);
+
        
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         float size; 
         float color[4] = { 0.8f, 0.3f, 0.02f, 1.0f };

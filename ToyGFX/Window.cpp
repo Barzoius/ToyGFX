@@ -1,6 +1,8 @@
 #include "Window.h"
 #include "InputDevices.h"
 
+#include <iostream>
+
 static bool sGLFWInitialized = false;
 
 Window::Window(int width, int height, const char* name)
@@ -44,6 +46,56 @@ void Window::Init(int width, int height, const char* name)
         [](GLFWwindow* wnd, int width, int height)
         { glViewport(0, 0, width, height);  });
 
+    //glfwSetKeyCallback(this->GetWindow(), key_callback);
+
+}
+
+void Window::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+
+    if (action == GLFW_PRESS)
+    {
+        if (key == GLFW_KEY_W) // FORWARD
+        {
+            //pWindow->mCamera.processKeyInput(Camera::CAM_MOVEMENT::FORWARD, 12.0f);
+            std::cout << "W";
+        }
+
+        if (key == GLFW_KEY_S) // BACKWARD
+        {
+
+        }
+
+        if (key == GLFW_KEY_A) // LEFT
+        {
+
+        }
+
+        if (key == GLFW_KEY_D) // RIGHT
+        {
+
+        }
+
+        if (key == GLFW_KEY_Q) // UPd
+        {
+            std::cout << "E";
+        }
+
+        if (key == GLFW_KEY_E) // DOWN
+        {
+
+        }
+    }
+
+    if (action == GLFW_RELEASE)
+    {
+
+    }
+
+    if (action == GLFW_REPEAT)
+    {
+
+    }
 }
 
 void Window::ProcessInput()
@@ -52,6 +104,17 @@ void Window::ProcessInput()
     {
         glfwSetWindowShouldClose(mWindow, true);    
     }
+    float deltaTime = 1.0f;
+
+    if (glfwGetKey(mWindow, GLFW_KEY_W) == GLFW_PRESS)
+        mCamera.processKeyInput(Camera::FORWARD, deltaTime);
+    if (glfwGetKey(mWindow, GLFW_KEY_S) == GLFW_PRESS)
+        mCamera.processKeyInput(Camera::BACKWARD, deltaTime);
+    if (glfwGetKey(mWindow, GLFW_KEY_A) == GLFW_PRESS)
+        mCamera.processKeyInput(Camera::LEFT, deltaTime);
+    if (glfwGetKey(mWindow, GLFW_KEY_D) == GLFW_PRESS)
+        mCamera.processKeyInput(Camera::RIGHT, deltaTime);
+
 }
 
 const char* Window::GetTitle() const noexcept

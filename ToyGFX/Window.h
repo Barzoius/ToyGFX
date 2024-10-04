@@ -6,8 +6,8 @@
 #include <functional>
 #include <memory>
 
-
-#include "InputDevices.h" 
+#include "Camera.h"
+//#include "InputDevices.h" 
 
 class Window
 {
@@ -29,6 +29,13 @@ public:
     GLFWwindow* GetWindow() const noexcept;
 
 private:
+    static void key_callback(GLFWwindow* window,
+        int keycode,
+        int scancode,
+        int action,
+        int mods);
+
+private:
    
     GLFWwindow* mWindow;
 
@@ -42,6 +49,7 @@ private:
     SWindow_Mdata mData;
 
 public:
-    InputDevices::Keyboard keyboard;
+    Camera mCamera;
+    //InputDevices::Keyboard keyboard;
     //InputDevices::Mouse mouse;
 };

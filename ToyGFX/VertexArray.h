@@ -4,7 +4,7 @@
 #include "VertexBuffer.h"
 
 
-class VertexArray : Bindable
+class VertexArray : public Bindable
 {
 public:
 
@@ -18,4 +18,5 @@ public:
     GLuint GetID();
 private:
     GLuint ID;
+   // VertexBuffer vbuf;
 };

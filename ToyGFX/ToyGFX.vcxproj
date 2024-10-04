@@ -156,7 +156,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Shaders\Shader.cpp" />
     <ClCompile Include="Surface.cpp" />
+    <ClCompile Include="TestBox.cpp" />
     <ClCompile Include="TestPlane.cpp" />
+    <ClCompile Include="TestSquare.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
@@ -184,9 +186,11 @@
     <ClInclude Include="Perspective.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Shaders\Shader.h" />
+    <ClInclude Include="Square.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="TestBox.h" />
     <ClInclude Include="TestPlane.h" />
+    <ClInclude Include="TestSquare.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="VertexBuffer.h" />

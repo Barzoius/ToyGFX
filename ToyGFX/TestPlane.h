@@ -8,5 +8,5 @@ class TestPlane : public Drawable
 public:
     TestPlane();
 
-    glm::mat4x4 GetTransform() const noexcept override;
+    //glm::mat4x4 GetTransform() const noexcept override;
 };

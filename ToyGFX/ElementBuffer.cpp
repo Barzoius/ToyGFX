@@ -18,7 +18,8 @@ ElementBuffer::~ElementBuffer()
 void ElementBuffer::Bind()
 {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ID);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+
 }
 
 
@@ -34,7 +35,7 @@ GLuint ElementBuffer::GetID()
     return ID;
 }
 
-int ElementBuffer::GetIndiciesCount()
+size_t ElementBuffer::GetIndiciesCount() const
 {
     return mIndiciesCount;
 }

@@ -14,6 +14,7 @@ namespace InputDevices
    
     class Keyboard
     {
+        //friend class Camera;
     public:
         
     public:
@@ -23,7 +24,6 @@ namespace InputDevices
         void EnableAutorepeat() noexcept;
         void DisableAutorepeat() noexcept;
         bool AutorepeatIsEnabled() const noexcept;
-
 
 
     private:

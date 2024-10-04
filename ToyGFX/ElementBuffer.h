@@ -15,11 +15,11 @@ public:
 
     GLuint GetID();
 
-    int GetIndiciesCount();
+    size_t GetIndiciesCount() const;
 
 private:
     GLuint ID;
     std::vector<unsigned int> indices;
 
-    int mIndiciesCount;
+    size_t mIndiciesCount;
 };

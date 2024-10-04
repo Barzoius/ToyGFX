@@ -4,6 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+
 class Camera
 {
 public:
@@ -35,13 +36,11 @@ public:
     void processMouseInput();
     void processMouseWheelInput();
 
-    glm::mat4x4 GetViewMatrix()
-    {
-        return glm::mat4x4( U.x, U.y, U.z, -camPosition.x,
-                            V.x, V.y, V.z, -camPosition.y, 
-                            N.x, N.y, N.z, -camPosition.z, 
-                            0.0f, 0.0f, 0.0f, 1.0f );
-    }
+    glm::mat4x4 GetViewMatrix();
+
+    void SetPosition(float x, float y, float z);
+
+    const float zoom = 45.0f;
 
 private:
     glm::vec3 camPosition = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -63,7 +62,7 @@ private:
     const float pitch = 0.0f;
     const float speed = 2.5f;
     const float sensitivity = 0.1f;
-    const float zoom = 45.0f;
+    //const float zoom = 45.0f;
 
     static constexpr float travelSpeed = 12.0f;
     static constexpr float rotationSpeed = 0.004f;
