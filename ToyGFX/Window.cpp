@@ -108,6 +108,15 @@ void Window::ProcessInput()
     }
     float deltaTime = 1.0f;
 
+    if (glfwGetKey(mWindow, GLFW_KEY_P) == GLFW_PRESS)
+    {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    }
+    if (glfwGetKey(mWindow, GLFW_KEY_O) == GLFW_PRESS)
+    {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+
     if (glfwGetKey(mWindow, GLFW_KEY_W) == GLFW_PRESS)
         mCamera.processKeyInput(Camera::FORWARD, deltaTime);
     if (glfwGetKey(mWindow, GLFW_KEY_S) == GLFW_PRESS)

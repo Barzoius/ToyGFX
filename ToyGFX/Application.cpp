@@ -19,13 +19,12 @@ Application::Application()
 {
     mWindow = std::make_unique<Window>(800, 600 , "TOY_GFX");
 
+    
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cout << "GLAD FAILED";
     }
-
-
 
     //shaderProgram = std::make_unique<ShaderSuite>(std::initializer_list<std::pair<std::string_view, Shader::ShaderType>>{
     //    {"Shaders/VertShader.glsl", Shader::ShaderType::VERTEX},
@@ -75,6 +74,11 @@ void Application::OnEvent()
     if (glfwGetKey(mWindow -> GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
     {
         glfwSetWindowShouldClose(mWindow -> GetWindow(), true);
+    }
+
+    if(glfwGetKey(mWindow -> GetWindow(), GLFW_KEY_P) == GLFW_PRESS)
+    {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }
 
     if (glfwGetKey(mWindow->GetWindow(), GLFW_KEY_E) == GLFW_PRESS)
