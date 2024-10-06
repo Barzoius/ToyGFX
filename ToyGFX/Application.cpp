@@ -26,6 +26,8 @@ Application::Application()
         std::cout << "GLAD FAILED";
     }
 
+    glEnable(GL_DEPTH_TEST);
+
     //shaderProgram = std::make_unique<ShaderSuite>(std::initializer_list<std::pair<std::string_view, Shader::ShaderType>>{
     //    {"Shaders/VertShader.glsl", Shader::ShaderType::VERTEX},
     //    { "Shaders/FragShader.glsl", Shader::ShaderType::FRAGMENT }
@@ -101,7 +103,7 @@ void Application::Run()
 
     TestSquare test;
 
-    //TestBox box(1.0f);
+    TestBox box(1.0f);
 
     while (!glfwWindowShouldClose(mWindow->GetWindow()))
     {
@@ -110,14 +112,14 @@ void Application::Run()
    
 
         glClearColor(0.91f, 0.64f, 0.09f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        test.Draw();
-        //box.Draw();
+        //test.Draw();
+        box.Draw();
       
         //test.Draw();
         //glm::mat4 projection = glm::perspective(glm::radians(mWindow->mCamera.zoom), (float)mWindow->GetWidth() / (float)mWindow ->  GetHeight(), 0.1f, 100.0f);
@@ -130,6 +132,24 @@ void Application::Run()
 
        
         //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        glm::mat4 model = glm::mat4(1.0f);
+
+        glm::mat4 cameraView = mWindow->mCamera.GetMatrix();
+        cameraView = glm::translate(cameraView, glm::vec3(0.0f, 0.0f, -6.0f));
+
+
+        glm::mat4 projection = glm::mat4(1.0f);
+        model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
+        projection = glm::perspective(glm::radians(45.0f), (float)mWindow->GetWidth() / (float)mWindow -> GetHeight(), 0.1f, 100.0f);
+
+        unsigned int modelLoc = glGetUniformLocation(test.GetShader() -> GetID(), "model");
+        unsigned int viewLoc = glGetUniformLocation(test.GetShader()->GetID(), "view");
+
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &cameraView[0][0]);
+
+        test.GetShader() -> setMat4("projection", projection);
 
         float size; 
         float color[4] = { 0.8f, 0.3f, 0.02f, 1.0f };

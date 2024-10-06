@@ -100,13 +100,18 @@ void Window::key_callback(GLFWwindow* window, int key, int scancode, int action,
     }
 }
 
+
+///----SET THE CALLBACK AND DELETE THIS----///
 void Window::ProcessInput()
 {
     if (glfwGetKey(mWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
     {
         glfwSetWindowShouldClose(mWindow, true);    
     }
-    float deltaTime = 1.0f;
+
+    float currentFrame = static_cast<float>(glfwGetTime());
+    deltaTime = currentFrame - lastFrame;
+    lastFrame = currentFrame;
 
     if (glfwGetKey(mWindow, GLFW_KEY_P) == GLFW_PRESS)
     {
@@ -125,6 +130,10 @@ void Window::ProcessInput()
         mCamera.processKeyInput(Camera::LEFT, deltaTime);
     if (glfwGetKey(mWindow, GLFW_KEY_D) == GLFW_PRESS)
         mCamera.processKeyInput(Camera::RIGHT, deltaTime);
+    if (glfwGetKey(mWindow, GLFW_KEY_R) == GLFW_PRESS)
+        mCamera.processKeyInput(Camera::UP, deltaTime);
+    if (glfwGetKey(mWindow, GLFW_KEY_F) == GLFW_PRESS)
+        mCamera.processKeyInput(Camera::DOWN, deltaTime);
 
 }
 

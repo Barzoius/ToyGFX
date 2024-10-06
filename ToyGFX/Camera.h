@@ -30,6 +30,7 @@ public:
     // luam transformul si ii aplicam roatia si scalarea curenta
     void Translate(glm::vec3 translate);
     void Rotate(float dx, float dy);
+
     void Update();
 
     void processKeyInput(CAM_MOVEMENT dir, float dt);
@@ -48,7 +49,7 @@ private:
     glm::vec3 camUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
     glm::vec3 camZ = glm::normalize(camPosition - camTarget); //FRONT
-    glm::vec3 camX = glm::normalize(glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), camZ)); //RIGHT
+    glm::vec3 camX = glm::normalize(glm::cross(camUp, camZ)); //RIGHT
     glm::vec3 camY = glm::cross(camZ, camX); // UP
     glm::vec3 WorldUp;
 
