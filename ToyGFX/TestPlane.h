@@ -6,7 +6,14 @@
 class TestPlane : public Drawable
 {
 public:
-    TestPlane();
+    TestPlane(float size);
 
-    //glm::mat4x4 GetTransform() const noexcept override;
+    void SetPosition(glm::vec3 pos) noexcept;
+
+    glm::mat4x4 GetTransformMatrix() const noexcept override;
+
+
+private:
+    glm::vec3 mPos = glm::vec3(1.0f, 1.0f, 1.0f);
+
 };

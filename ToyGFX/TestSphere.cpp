@@ -12,7 +12,7 @@ TestSphere::TestSphere(float size)
         glm::vec3 pos;
     };
 
-    auto model = Sphere::MakeUVSphere<VERTEX>(50, 50);
+    auto model = Sphere::Make<VERTEX>();
 
     model.Treansform(glm::vec3(size, size, size));
 

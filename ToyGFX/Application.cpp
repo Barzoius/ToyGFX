@@ -13,6 +13,7 @@
 #include "TestSquare.h"
 #include "TestBox.h"
 #include "TestSphere.h"
+#include "TestPlane.h"
 
 
 Application::Application()
@@ -77,6 +78,8 @@ void Application::Run()
 
     TestSphere sphere(1.0f);
 
+    TestPlane plane(1.0f);
+
 
     while (!glfwWindowShouldClose(mWindow->GetWindow()))
     {
@@ -94,7 +97,9 @@ void Application::Run()
         //test.Draw();
         //box.Draw();
 
-        sphere.Draw();
+        //sphere.Draw();
+
+        plane.Draw();
       
         glm::mat4 model = glm::mat4(1.0f);
 

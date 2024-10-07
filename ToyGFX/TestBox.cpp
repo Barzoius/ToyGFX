@@ -14,7 +14,7 @@ TestBox::TestBox(float size)
 
     auto model = Cube::Make<VERTEX>();
 
-    model.Treansform(glm::vec3(size, size, size));
+    model.Treansform(glm::vec3(size, size*2, size));
     
     AddBind(std::make_unique<VertexBuffer<VERTEX>>(model.vertices));           // vertices
     AddBind(std::make_unique<VertexArray>());
