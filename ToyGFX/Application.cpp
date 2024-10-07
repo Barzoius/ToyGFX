@@ -12,7 +12,7 @@
 
 #include "TestSquare.h"
 #include "TestBox.h"
-
+#include "TestSphere.h"
 
 
 Application::Application()
@@ -32,36 +32,6 @@ Application::Application()
     //    {"Shaders/VertShader.glsl", Shader::ShaderType::VERTEX},
     //    { "Shaders/FragShader.glsl", Shader::ShaderType::FRAGMENT }
     //});
-
-
-    std::vector<float> vertices = {
-        // positions         // colors
-        0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 1.0f,  // bottom right
-        0.5f, -0.5f, 0.0f,  0.543f, 1.0f, 0.0f,  // bottom left
-        -0.5f,  -0.5f, 0.0f,  0.0f, 0.23f, 1.0f,   // top 
-        -0.5f,  0.5f, 0.0f,  0.0f, 0.65f, 0.0f
-    };
-
-    std::vector<unsigned int> indices = {
-        0, 1, 3,
-        1, 2, 3
-    };
-
-
-    //ElementBuffer EB(indices);
-   
-
-    //VertexArray VA;
-    
-
-    //VertexBuffer VB(vertices);
-
-   // VB.Bind();
-    //VA.Bind();
-
-    //EB.Bind();
-
-
 }
 
 Application::~Application()
@@ -105,6 +75,9 @@ void Application::Run()
 
     TestBox box(1.0f);
 
+    TestSphere sphere(1.0f);
+
+
     while (!glfwWindowShouldClose(mWindow->GetWindow()))
     {
 
@@ -119,20 +92,10 @@ void Application::Run()
         ImGui::NewFrame();
 
         //test.Draw();
-        box.Draw();
+        //box.Draw();
+
+        sphere.Draw();
       
-        //test.Draw();
-        //glm::mat4 projection = glm::perspective(glm::radians(mWindow->mCamera.zoom), (float)mWindow->GetWidth() / (float)mWindow ->  GetHeight(), 0.1f, 100.0f);
-
-        //shaderProgram->setMat4("projection", projection);
-
-        //glm::mat4 view = mWindow->mCamera.GetViewMatrix();
-
-        //shaderProgram->setMat4("view", view);
-
-       
-        //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
         glm::mat4 model = glm::mat4(1.0f);
 
         glm::mat4 cameraView = mWindow->mCamera.GetMatrix();

@@ -102,6 +102,9 @@
     <ClCompile Include="TestSquare.cpp">
       <Filter>Source Files\Drawables</Filter>
     </ClCompile>
+    <ClCompile Include="TestSphere.cpp">
+      <Filter>Source Files\Drawables</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -195,6 +198,12 @@
       <Filter>Header Files\Primitives</Filter>
     </ClInclude>
     <ClInclude Include="TestSquare.h">
+      <Filter>Header Files\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSphere.h">
       <Filter>Header Files\Drawables</Filter>
     </ClInclude>
   </ItemGroup>
