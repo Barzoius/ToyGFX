@@ -1,5 +1,5 @@
-#include "TestPlane.h"
-#include "Plane.h"
+#include "TestPyramid.h"
+#include "Pyramid.h"
 #include "BindableObjects.h"
 #include "Shaders\Shader.h"
 
@@ -7,14 +7,14 @@
 
 #include "imgui/imgui.h"
 
-TestPlane::TestPlane(float size)
+TestPyramid::TestPyramid(float size)
 {
     struct VERTEX
     {
         glm::vec3 pos;
     };
 
-    auto model = Plane::Make<VERTEX>();
+    auto model = Pyramid::Make<VERTEX>();
 
     model.Treansform(glm::vec3(size, size, size));
 
@@ -30,7 +30,7 @@ TestPlane::TestPlane(float size)
 
 }
 
-void TestPlane::SetPosition(glm::vec3 pos) noexcept
+void TestPyramid::SetPosition(glm::vec3 pos) noexcept
 {
     mPos.x = pos.x;
     mPos.y = pos.y;
@@ -38,7 +38,7 @@ void TestPlane::SetPosition(glm::vec3 pos) noexcept
 
 }
 
-glm::mat4x4 TestPlane::GetTransformMatrix() const noexcept
+glm::mat4x4 TestPyramid::GetTransformMatrix() const noexcept
 {
     glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), yaw, glm::vec3(0.0f, 0.0f, 1.0f)) *    // Yaw (Z-axis)
                          glm::rotate(glm::mat4(1.0f), pitch, glm::vec3(0.0f, 1.0f, 0.0f)) *  // Pitch (Y-axis)
@@ -51,9 +51,10 @@ glm::mat4x4 TestPlane::GetTransformMatrix() const noexcept
 
 
 
-void TestPlane::ControlWND() noexcept
+
+void TestPyramid::ControlWND() noexcept
 {
-    if (ImGui::Begin("Plane"))
+    if (ImGui::Begin("Pyramid"))
     {
         ImGui::Text("Position");
         ImGui::SliderFloat("X", &mPos.x, -80.0f, 80.0f, "%.1f");

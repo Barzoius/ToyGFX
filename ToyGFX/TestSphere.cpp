@@ -5,6 +5,8 @@
 
 #include <string>
 
+#include "imgui/imgui.h"
+
 TestSphere::TestSphere(float size)
 {
     struct VERTEX
@@ -38,6 +40,30 @@ void TestSphere::SetPosition(glm::vec3 pos) noexcept
 
 glm::mat4x4 TestSphere::GetTransformMatrix() const noexcept
 {
-    // add the rotation
-    return glm::translate(glm::mat4(1.0f), mPos); // * rotation
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), yaw, glm::vec3(0.0f, 0.0f, 1.0f)) *    // Yaw (Z-axis)
+                         glm::rotate(glm::mat4(1.0f), pitch, glm::vec3(0.0f, 1.0f, 0.0f)) *  // Pitch (Y-axis)
+                         glm::rotate(glm::mat4(1.0f), roll, glm::vec3(1.0f, 0.0f, 0.0f));    // Roll (X-axis)
+
+    glm::mat4 translation = glm::translate(glm::mat4(1.0f), mPos);
+
+    return translation * rotation;
+}
+
+
+
+void TestSphere::ControlWND() noexcept
+{
+    if (ImGui::Begin("Sphere"))
+    {
+        ImGui::Text("Position");
+        ImGui::SliderFloat("X", &mPos.x, -80.0f, 80.0f, "%.1f");
+        ImGui::SliderFloat("Y", &mPos.y, -80.0f, 80.0f, "%.1f");
+        ImGui::SliderFloat("Z", &mPos.z, -80.0f, 80.0f, "%.1f");
+        ImGui::Text("Orientation");
+        ImGui::SliderAngle("Roll", &roll, -180.0f, 180.0f);
+        ImGui::SliderAngle("Pitch", &pitch, -180.0f, 180.0f);
+        ImGui::SliderAngle("Yaw", &yaw, -180.0f, 180.0f);
+
+    }
+    ImGui::End();
 }

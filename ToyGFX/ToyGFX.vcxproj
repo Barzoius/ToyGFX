@@ -158,6 +158,8 @@
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="TestBox.cpp" />
     <ClCompile Include="TestPlane.cpp" />
+    <ClCompile Include="TestPrism.cpp" />
+    <ClCompile Include="TestPyramid.cpp" />
     <ClCompile Include="TestSphere.cpp" />
     <ClCompile Include="TestSquare.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -170,6 +172,8 @@
     <ClInclude Include="Bindable.h" />
     <ClInclude Include="BindableObjects.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Prism.h" />
+    <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="ElementBuffer.h" />
@@ -192,6 +196,8 @@
     <ClInclude Include="Surface.h" />
     <ClInclude Include="TestBox.h" />
     <ClInclude Include="TestPlane.h" />
+    <ClInclude Include="TestPrism.h" />
+    <ClInclude Include="TestPyramid.h" />
     <ClInclude Include="TestSphere.h" />
     <ClInclude Include="TestSquare.h" />
     <ClInclude Include="Texture.h" />

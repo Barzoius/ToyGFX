@@ -14,6 +14,8 @@
 #include "TestBox.h"
 #include "TestSphere.h"
 #include "TestPlane.h"
+#include "TestPyramid.h"
+#include "TestPrism.h"
 
 
 Application::Application()
@@ -28,11 +30,6 @@ Application::Application()
     }
 
     glEnable(GL_DEPTH_TEST);
-
-    //shaderProgram = std::make_unique<ShaderSuite>(std::initializer_list<std::pair<std::string_view, Shader::ShaderType>>{
-    //    {"Shaders/VertShader.glsl", Shader::ShaderType::VERTEX},
-    //    { "Shaders/FragShader.glsl", Shader::ShaderType::FRAGMENT }
-    //});
 }
 
 Application::~Application()
@@ -80,6 +77,9 @@ void Application::Run()
 
     TestPlane plane(1.0f);
 
+    TestPyramid pyr(1.0f);
+
+    TestPrism prism(1.0f);
 
     while (!glfwWindowShouldClose(mWindow->GetWindow()))
     {
@@ -95,20 +95,32 @@ void Application::Run()
         ImGui::NewFrame();
 
         //test.Draw();
-        //box.Draw();
+        box.Draw();
+
+        //prism.Draw();
+
+        
 
         //sphere.Draw();
 
-        plane.Draw();
+        //plane.Draw();
+
+        //pyr.Draw();
       
-        glm::mat4 model = glm::mat4(1.0f);
+        //glm::mat4 model = glm::mat4(1.0f);
+        //model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 0.0f));
+        //model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+
+        //model = box.Translate(model);
+
+        glm::mat4 model = box.GetTransformMatrix();
+
 
         glm::mat4 cameraView = mWindow->mCamera.GetMatrix();
         cameraView = glm::translate(cameraView, glm::vec3(0.0f, 0.0f, -6.0f));
 
 
         glm::mat4 projection = glm::mat4(1.0f);
-        model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
         projection = glm::perspective(glm::radians(45.0f), (float)mWindow->GetWidth() / (float)mWindow -> GetHeight(), 0.1f, 100.0f);
 
         unsigned int modelLoc = glGetUniformLocation(test.GetShader() -> GetID(), "model");
@@ -119,16 +131,9 @@ void Application::Run()
 
         test.GetShader() -> setMat4("projection", projection);
 
-        float size; 
-        float color[4] = { 0.8f, 0.3f, 0.02f, 1.0f };
-        ImGui::Begin("IMGUI");
-        ImGui::Text("IMGUI MSG");
-
-        ImGui::SliderFloat("Size", &size, 0.5f, 2.0f);
-
-        ImGui::ColorEdit4("Color", color);
-
-        ImGui::End();
+        box.ControlWND();
+        //prism.ControlWND();
+        sphere.ControlWND();
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
