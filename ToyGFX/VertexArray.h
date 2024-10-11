@@ -12,11 +12,11 @@ public:
     ~VertexArray();
 
     void Bind() override;
+    void Unbind() override;
 
-   // void LinkVertexBuff(VertexBuffer vb);
 
     GLuint GetID();
 private:
-    GLuint ID;
+    GLuint VA_ID;
    // VertexBuffer vbuf;
 };

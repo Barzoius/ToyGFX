@@ -20,8 +20,8 @@ public:
 
     void Draw() const noexcept;
 
+
     virtual glm::mat4x4 GetTransformMatrix() const noexcept = 0;
-    //virtual void Update() noexcept = 0;
 
     ShaderSuite* GetShader() const noexcept;
 

@@ -18,8 +18,10 @@ TestSphere::TestSphere(float size)
 
     model.Treansform(glm::vec3(size, size, size));
 
-    AddBind(std::make_unique<VertexBuffer<VERTEX>>(model.vertices));           // vertices
     AddBind(std::make_unique<VertexArray>());
+
+    AddBind(std::make_unique<VertexBuffer<VERTEX>>(model.vertices));           // vertices
+
 
     AddElementBuffer(std::make_unique<ElementBuffer>(model.indices));  // indices
 

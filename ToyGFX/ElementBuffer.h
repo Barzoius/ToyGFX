@@ -10,6 +10,7 @@ public:
     ~ElementBuffer();
 
     void Bind() override;
+    void Unbind() override;
 
     void DrawIndexed();
 
@@ -18,7 +19,7 @@ public:
     size_t GetIndiciesCount() const;
 
 private:
-    GLuint ID;
+    GLuint EB_ID;
     std::vector<unsigned int> indices;
 
     size_t mIndiciesCount;

@@ -8,9 +8,15 @@
 
 void Drawable::Draw() const noexcept
 {
-    if (pShaderProgram) {
-        pShaderProgram->use(); // Ensure the shader program is in use
-    }
+    //if (pShaderProgram) {
+    //    pShaderProgram->use(); 
+    //}
+
+    //glm::mat4 model = this->GetTransformMatrix();
+
+    //unsigned int modelLoc = glGetUniformLocation(this -> GetShader()->GetID(), "model");
+
+    //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
     for (auto& b : bindables)
     {
@@ -19,6 +25,8 @@ void Drawable::Draw() const noexcept
     }
 
     glDrawElements(GL_TRIANGLES, (GLsizei)pElemBuffer->GetIndiciesCount(), GL_UNSIGNED_INT, 0);
+
+    glBindVertexArray(0);
 
 }
 
@@ -38,7 +46,6 @@ void Drawable::AddShaderProgram(std::unique_ptr<ShaderSuite> ss) noexcept
 {
     assert("Attempting to add a second shader program" && pShaderProgram == nullptr);
     pShaderProgram = std::move(ss);
-
 }
 
 

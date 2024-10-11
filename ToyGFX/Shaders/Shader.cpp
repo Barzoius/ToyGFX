@@ -67,7 +67,6 @@ ShaderSuite::ShaderSuite(std::initializer_list<std::pair<std::string_view, Shade
 
     }
 
-   
 
     glLinkProgram(ID);
     checkCompileErrors(ID, "PROGRAM");

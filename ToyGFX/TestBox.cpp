@@ -17,10 +17,12 @@ TestBox::TestBox(float size)
 
     auto model = Cube::Make<VERTEX>();
 
-    model.Treansform(glm::vec3(size, size*2, size));
-    
-    AddBind(std::make_unique<VertexBuffer<VERTEX>>(model.vertices));           // vertices
+    model.Treansform(glm::vec3(size, size * 4, size));
+
     AddBind(std::make_unique<VertexArray>());
+
+    AddBind(std::make_unique<VertexBuffer<VERTEX>>(model.vertices));           // vertices
+
 
     AddElementBuffer(std::make_unique<ElementBuffer>(model.indices));  // indices
 
@@ -44,7 +46,7 @@ glm::mat4x4 TestBox::GetTransformMatrix() const noexcept
     glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), yaw, glm::vec3(0.0f, 0.0f, 1.0f)) *    // Yaw (Z-axis)
                          glm::rotate(glm::mat4(1.0f), pitch, glm::vec3(0.0f, 1.0f, 0.0f)) *  // Pitch (Y-axis)
                          glm::rotate(glm::mat4(1.0f), roll, glm::vec3(1.0f, 0.0f, 0.0f));    // Roll (X-axis)
-    
+ 
     glm::mat4 translation = glm::translate(glm::mat4(1.0f), mPos);
 
     return translation * rotation;

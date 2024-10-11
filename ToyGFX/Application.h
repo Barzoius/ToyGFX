@@ -11,6 +11,15 @@
 
 
 
+#include "TestSquare.h"
+#include "TestBox.h"
+#include "TestSphere.h"
+#include "TestPlane.h"
+#include "TestPyramid.h"
+#include "TestPrism.h"
+
+
+
 class Application
 {
 public:
@@ -23,6 +32,20 @@ public:
     bool OnWindowClose();
 
     inline Window* GetWindow() { return mWindow.get(); }
+
+    //TestSquare test;
+
+    TestBox* box;
+
+    TestSphere* sphere;
+
+    //TestSphere sphere{1.0f};
+
+    //TestPlane plane{ 1.0f };
+
+    //TestPyramid pyr{1.0f};
+
+    //TestPrism prism{ 1.0f };
     
 private:
     std::unique_ptr<Window> mWindow;
@@ -32,6 +55,8 @@ private:
     Timer timer;
 
    // Projection proj;
+
+
 
     
     std::unique_ptr<ShaderSuite> shaderProgram{};

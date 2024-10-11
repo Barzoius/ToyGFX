@@ -1,27 +1,30 @@
 #include "VertexArray.h"
-
+#include <iostream>
 
 VertexArray::VertexArray()
 {
-    glGenVertexArrays(1, &ID);
+    glGenVertexArrays(1, &VA_ID);
+
+    std::cout << "ARRAY_BUF: " << VA_ID << "\n";
 }
 
 
 VertexArray::~VertexArray()
 {
-
+    glDeleteVertexArrays(1, &VA_ID);
 }
 
 
 void VertexArray::Bind()
 {
-    glBindVertexArray(ID);
+    glBindVertexArray(VA_ID);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
+}
 
-    //glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-    //glEnableVertexAttribArray(1);
+
+void VertexArray::Unbind()
+{
+    glBindVertexArray(0);
 }
 
 
@@ -29,5 +32,5 @@ void VertexArray::Bind()
 
 GLuint VertexArray::GetID()
 {
-    return ID;
+    return VA_ID;
 }

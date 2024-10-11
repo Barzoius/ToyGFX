@@ -226,6 +226,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\Geom.glsl" />
+    <None Include="Shaders\Frag.glsl" />
+    <None Include="Shaders\Vert.glsl" />
   </ItemGroup>
 </Project>
