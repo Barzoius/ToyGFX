@@ -23,11 +23,12 @@ Application::Application()
         std::cout << "GLAD FAILED";
     }
 
-
-    box = new TestBox(1.0f);
     sphere = new TestSphere(1.0f);
+    box = new TestBox(1.0f);
 
-
+    plane = new TestPlane(1.0f);
+    pyr = new TestPyramid(1.0f);
+    prism = new TestPrism(1.0f);
 
     glEnable(GL_DEPTH_TEST);
 }
@@ -69,6 +70,13 @@ void Application::Run()
 
 
 
+    glm::mat4 cameraView;
+    glm::mat4 projection = glm::mat4(1.0f);
+
+    int Divs = 8;
+
+    float squareSize = 2.0f / Divs;
+
     while (!glfwWindowShouldClose(mWindow->GetWindow()))
     {
 
@@ -82,60 +90,44 @@ void Application::Run()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-
-        glm::mat4 cameraView = mWindow->mCamera.GetMatrix();
+        cameraView = mWindow->mCamera.GetMatrix();
         cameraView = glm::translate(cameraView, glm::vec3(0.0f, 0.0f, -6.0f));
 
-        glm::mat4 projection = glm::mat4(1.0f);
         projection = glm::perspective(glm::radians(45.0f), (float)mWindow->GetWidth() / (float)mWindow->GetHeight(), 0.1f, 100.0f);
 
-
-        box->ControlWND();
-
-        box->GetShader()->use();
-
-        glm::mat4 boxMod = box->GetTransformMatrix();
-
-        unsigned int modelBox = glGetUniformLocation(box->GetShader()->GetID(), "model");
-
-        glUniformMatrix4fv(modelBox, 1, GL_FALSE, glm::value_ptr(boxMod));
-
-        unsigned int viewLocBox = glGetUniformLocation(box->GetShader()->GetID(), "view");
-
-        glUniformMatrix4fv(viewLocBox, 1, GL_FALSE, &cameraView[0][0]);
-
-        box->GetShader()->setMat4("projection", projection);
-
-        box->Draw();
-
+        pyr->ControlWND();
+        //pyr->SetPosition();
+        pyr->Draw(cameraView, projection);
+        pyr->GetShader()->setVec3("Color", 1.0f, 0.0f, 0.0f);
 
 
 
         sphere->ControlWND();
-
-
-        sphere->GetShader()->use();
-
-        glm::mat4 sphereMod = sphere -> GetTransformMatrix();
-
-        unsigned int modelSphere = glGetUniformLocation(sphere->GetShader()->GetID(), "model");
-
-        glUniformMatrix4fv(modelSphere, 1, GL_FALSE, glm::value_ptr(sphereMod));
-
-        unsigned int viewLoc = glGetUniformLocation(sphere->GetShader()->GetID(), "view");
-
-        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &cameraView[0][0]);
-
-        sphere -> GetShader() -> setMat4("projection", projection);
-
-        sphere->Draw();
-
- 
+        //sphere->SetPosition();
+        sphere->Draw(cameraView, projection);
+        sphere->GetShader()->setVec3("Color", 0.5f, 0.0f, 0.5f);
 
 
 
+        box->ControlWND();
+        //box->SetPosition();
+        box->Draw(cameraView, projection);
+        box->GetShader()->setVec3("Color", 0.0f, 0.0f, 1.0f);
 
 
+        
+        plane->ControlWND();
+        //plane->SetPosition();
+        plane->Draw(cameraView, projection);
+        plane->GetShader()->setVec3("Color", 1.0f, 0.5f, 0.31f);
+        plane->GetShader()->setFloat("SquareSize", squareSize);
+
+
+  
+       // prism->ControlWND();
+        //prism->SetPosition();
+        //prism->Draw(cameraView, projection);
+        //prism->GetShader()->setVec3("Color", 0.0f, 0.23f, 0.3f);
         
 
         ImGui::Render();

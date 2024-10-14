@@ -6,17 +6,35 @@
 
 
 
-void Drawable::Draw() const noexcept
+void Drawable::Draw(glm::mat4& viewMatrix, glm::mat4& projMatrix) const noexcept
 {
-    //if (pShaderProgram) {
-    //    pShaderProgram->use(); 
-    //}
+    if (pShaderProgram) {
+        pShaderProgram->use(); 
+    }
 
-    //glm::mat4 model = this->GetTransformMatrix();
+    glm::mat4 model = this->GetTransformMatrix();
 
-    //unsigned int modelLoc = glGetUniformLocation(this -> GetShader()->GetID(), "model");
+    viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0.0f, -6.0f));
 
-    //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+    //MODEL
+
+    unsigned int modelLoc = glGetUniformLocation(this -> GetShader()->GetID(), "model");
+
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+
+    //VIEW
+
+    unsigned int viewLocBox = glGetUniformLocation(this->GetShader()->GetID(), "view");
+
+    glUniformMatrix4fv(viewLocBox, 1, GL_FALSE, &viewMatrix[0][0]);
+
+
+    //PROJ
+
+    this->GetShader()->setMat4("projection", projMatrix);
+
 
     for (auto& b : bindables)
     {

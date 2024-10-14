@@ -39,13 +39,12 @@ public:
 
     TestSphere* sphere;
 
-    //TestSphere sphere{1.0f};
 
-    //TestPlane plane{ 1.0f };
+    TestPlane* plane;
 
-    //TestPyramid pyr{1.0f};
+    TestPyramid* pyr;
 
-    //TestPrism prism{ 1.0f };
+    TestPrism* prism;
     
 private:
     std::unique_ptr<Window> mWindow;

@@ -202,6 +202,7 @@
     <ClInclude Include="TestSquare.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="UniformBufffer.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="Window.h" />

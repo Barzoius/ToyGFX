@@ -18,7 +18,7 @@ public:
     Drawable(const Drawable&) = delete;
     ~Drawable() = default;
 
-    void Draw() const noexcept;
+    void Draw(glm::mat4& viewMatrix, glm::mat4& projMatrix) const noexcept;
 
 
     virtual glm::mat4x4 GetTransformMatrix() const noexcept = 0;

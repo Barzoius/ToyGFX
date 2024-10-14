@@ -224,6 +224,9 @@
     <ClInclude Include="TestPrism.h">
       <Filter>Header Files\Drawables</Filter>
     </ClInclude>
+    <ClInclude Include="UniformBufffer.h">
+      <Filter>Header Files\Bindables</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Frag.glsl" />

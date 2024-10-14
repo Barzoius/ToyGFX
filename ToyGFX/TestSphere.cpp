@@ -16,7 +16,7 @@ TestSphere::TestSphere(float size)
 
     auto model = Sphere::Make<VERTEX>();
 
-    model.Treansform(glm::vec3(size, size, size));
+    model.Treansform(glm::vec3(size * 0.5f, size * 0.5f, size * 0.5f));
 
     AddBind(std::make_unique<VertexArray>());
 

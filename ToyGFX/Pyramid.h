@@ -29,7 +29,7 @@ public:
 
         float radius, height;
 
-        float RAD = 1.0f;
+        float RAD = 0.5f;
 
         height = 2.0f;
 

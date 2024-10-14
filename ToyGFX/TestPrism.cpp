@@ -17,10 +17,12 @@ TestPrism::TestPrism(float size)
 
     auto model = Prism::Make<VERTEX>();
 
-    model.Treansform(glm::vec3(size, size * 2, size));
+    model.Treansform(glm::vec3(size * 0.5f, size * 0.5f, size * 0.5f));
+
+    AddBind(std::make_unique<VertexArray>());
 
     AddBind(std::make_unique<VertexBuffer<VERTEX>>(model.vertices));           // vertices
-    AddBind(std::make_unique<VertexArray>());
+
 
     AddElementBuffer(std::make_unique<ElementBuffer>(model.indices));  // indices
 
