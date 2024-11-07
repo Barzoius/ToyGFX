@@ -11,12 +11,14 @@
 
 
 
-#include "TestSquare.h"
+
 #include "TestBox.h"
-#include "TestSphere.h"
-#include "TestPlane.h"
 #include "TestPyramid.h"
-#include "TestPrism.h"
+#include "LightSource.h"
+#include "TestPlane.h"
+#include "TestContour.h"
+#include "TestSquare.h"
+#include "TestGrid.h"
 
 
 
@@ -33,18 +35,21 @@ public:
 
     inline Window* GetWindow() { return mWindow.get(); }
 
-    //TestSquare test;
-
     TestBox* box;
 
-    TestSphere* sphere;
-
-
-    TestPlane* plane;
+    LightSource* light;
 
     TestPyramid* pyr;
 
-    TestPrism* prism;
+    TestPlane* ScreenPlane;
+    
+
+    TestContour* CC;
+
+
+    TestSquare* SQ;
+
+    TestGrid* GRID;
     
 private:
     std::unique_ptr<Window> mWindow;

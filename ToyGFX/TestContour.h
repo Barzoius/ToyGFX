@@ -1,11 +1,12 @@
 #pragma once
 
 #include "Drawable.h"
+#include "ElementBuffer.h"
 
-class TestSquare : public Drawable
+class TestContour : public Drawable
 {
 public:
-    TestSquare();
+    TestContour();
     void SetPosition(glm::vec3 pos) noexcept;
     //void SetRotation() noexcept;
 
@@ -14,10 +15,9 @@ public:
     void ControlWND() noexcept;
 
 private:
-    glm::vec3 mPos = glm::vec3(1.0f, 1.0f, 0.0f);
+    glm::vec3 mPos = glm::vec3(0.0f, 0.0f, 0.0f);
 
-
-    float roll = 0.0f;
+    float roll = -86.0f;
     float pitch = 0.0f;
     float yaw = 0.0f;
 };

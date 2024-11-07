@@ -25,6 +25,8 @@ public:
 
     ShaderSuite* GetShader() const noexcept;
 
+    void LoadTexture(const char* texturePath);
+
 protected:
     void AddBind(std::unique_ptr<Bindable>) noexcept;
     void AddElementBuffer(std::unique_ptr<class ElementBuffer>) noexcept;
@@ -35,4 +37,6 @@ private:
     const class ElementBuffer* pElemBuffer = nullptr;
 
     std::vector<std::unique_ptr<Bindable>> bindables;
+
+    GLuint texture;
 };

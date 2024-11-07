@@ -9,6 +9,7 @@
 #include "VertexArray.h"
 #include "ElementBuffer.h"
 
+#include "Shaders\Shader.h"
 
 
 
@@ -23,12 +24,21 @@ Application::Application()
         std::cout << "GLAD FAILED";
     }
 
-    sphere = new TestSphere(1.0f);
     box = new TestBox(1.0f);
+    light = new LightSource(1.0f);
+    light->SetPosition(glm::vec3(0.0f, 0.0f, -6.0f));
 
-    plane = new TestPlane(1.0f);
-    pyr = new TestPyramid(1.0f);
-    prism = new TestPrism(1.0f);
+    pyr = new TestPyramid(2.0f);
+
+    ScreenPlane = new TestPlane(1.0f);
+
+
+    CC = new TestContour();
+
+    GRID = new TestGrid(1.0f);
+    //SQ = new TestSquare();
+
+
 
     glEnable(GL_DEPTH_TEST);
 }
@@ -77,6 +87,14 @@ void Application::Run()
 
     float squareSize = 2.0f / Divs;
 
+    //ShaderSuite ss = ShaderSuite(std::initializer_list<std::pair<std::string_view, Shader::ShaderType>>{
+    //    {"Shaders/BaseVertex.glsl", Shader::ShaderType::VERTEX},
+    //    { "Shaders/CSG.glsl", Shader::ShaderType::FRAGMENT }
+    //});
+
+    //glm::vec2 res = glm::vec2(mWindow->GetHeight(), mWindow->GetWidth());
+
+
     while (!glfwWindowShouldClose(mWindow->GetWindow()))
     {
 
@@ -91,44 +109,48 @@ void Application::Run()
         ImGui::NewFrame();
 
         cameraView = mWindow->mCamera.GetMatrix();
-        cameraView = glm::translate(cameraView, glm::vec3(0.0f, 0.0f, -6.0f));
+        cameraView = glm::translate(cameraView, glm::vec3(0.0f, 0.0f, 1.0f));
 
         projection = glm::perspective(glm::radians(45.0f), (float)mWindow->GetWidth() / (float)mWindow->GetHeight(), 0.1f, 100.0f);
 
-        pyr->ControlWND();
-        //pyr->SetPosition();
-        pyr->Draw(cameraView, projection);
-        pyr->GetShader()->setVec3("Color", 1.0f, 0.0f, 0.0f);
-
-
-
-        sphere->ControlWND();
-        //sphere->SetPosition();
-        sphere->Draw(cameraView, projection);
-        sphere->GetShader()->setVec3("Color", 0.5f, 0.0f, 0.5f);
-
-
-
-        box->ControlWND();
-        //box->SetPosition();
-        box->Draw(cameraView, projection);
-        box->GetShader()->setVec3("Color", 0.0f, 0.0f, 1.0f);
-
+       /* ss.setVec2("uResolution", res);
+        ss.use();*/
 
         
-        plane->ControlWND();
-        //plane->SetPosition();
-        plane->Draw(cameraView, projection);
-        plane->GetShader()->setVec3("Color", 1.0f, 0.5f, 0.31f);
-        plane->GetShader()->setFloat("SquareSize", squareSize);
 
+        //box->ControlWND();
+        //box->Draw(cameraView, projection);
+        //box->GetShader()->setVec3("Color", 0.0f, 0.0f, 1.0f);
 
-  
-       // prism->ControlWND();
-        //prism->SetPosition();
-        //prism->Draw(cameraView, projection);
-        //prism->GetShader()->setVec3("Color", 0.0f, 0.23f, 0.3f);
         
+            //light->ControlWND();
+            //light->Draw(cameraView, projection);
+            //light->GetShader()->setVec3("Color", 1.0f, 1.0f, 1.0f);
+
+
+
+        //pyr->ControlWND();
+        //pyr->Draw(cameraView, projection);
+        //pyr->GetShader()->setVec3("Color", 1.0f, 0.23f, 1.0f);
+   
+
+
+        //CC->ControlWND();
+        //CC->Draw(cameraView, projection);
+        //CC->GetShader()->setVec3("Color", 1.0f, 0.23f, 1.0f);
+
+        
+
+
+        GRID->ControlWND();
+        GRID->Draw(cameraView, projection);
+        GRID->GetShader()->setVec3("Color", 1.0f, 0.23f, 1.0f);
+
+        //SQ->ControlWND();
+        //SQ->Draw(cameraView, projection);
+        //SQ->GetShader()->setVec3("Color", 1.0f, 0.23f, 1.0f);
+
+ 
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

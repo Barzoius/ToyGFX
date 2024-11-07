@@ -29,7 +29,6 @@ void VertexArray::Unbind()
 
 
 
-
 GLuint VertexArray::GetID()
 {
     return VA_ID;

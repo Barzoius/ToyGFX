@@ -1,25 +1,23 @@
-#include "TestSquare.h"
-#include "Square.h"
+#include "TestGrid.h"
 
-
+#include "VoxelGrid.h"
 #include "BindableObjects.h"
 #include "Shaders\Shader.h"
-
 
 #include <string>
 
 #include "imgui/imgui.h"
 
-TestSquare::TestSquare()
+TestGrid::TestGrid(float size)
 {
     struct VERTEX
     {
         glm::vec3 pos;
-        //glm::vec3 col;
-        //glm::vec2 tex;
     };
 
-    auto model = Square::Make<VERTEX>();
+    auto model = VoxelGrid::Make<VERTEX>();
+
+    model.Treansform(glm::vec3(size, size, size));
 
     AddBind(std::make_unique<VertexArray>());
 
@@ -35,18 +33,7 @@ TestSquare::TestSquare()
 
 }
 
-glm::mat4x4 TestSquare::GetTransformMatrix() const noexcept
-{
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), yaw, glm::vec3(0.0f, 0.0f, 1.0f)) *    // Yaw (Z-axis)
-    glm::rotate(glm::mat4(1.0f), pitch, glm::vec3(0.0f, 1.0f, 0.0f)) *  // Pitch (Y-axis)
-    glm::rotate(glm::mat4(1.0f), roll, glm::vec3(1.0f, 0.0f, 0.0f));    // Roll (X-axis)
-
-    glm::mat4 translation = glm::translate(glm::mat4(1.0f), mPos);
-
-    return translation * rotation;
-}
-
-void TestSquare::SetPosition(glm::vec3 pos) noexcept
+void TestGrid::SetPosition(glm::vec3 pos) noexcept
 {
     mPos.x = pos.x;
     mPos.y = pos.y;
@@ -54,11 +41,22 @@ void TestSquare::SetPosition(glm::vec3 pos) noexcept
 
 }
 
-
-
-void TestSquare::ControlWND() noexcept
+glm::mat4x4 TestGrid::GetTransformMatrix() const noexcept
 {
-    if (ImGui::Begin("Square"))
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), yaw, glm::vec3(0.0f, 0.0f, 1.0f)) *    // Yaw (Z-axis)
+        glm::rotate(glm::mat4(1.0f), pitch, glm::vec3(0.0f, 1.0f, 0.0f)) *  // Pitch (Y-axis)
+        glm::rotate(glm::mat4(1.0f), roll, glm::vec3(1.0f, 0.0f, 0.0f));    // Roll (X-axis)
+
+    glm::mat4 translation = glm::translate(glm::mat4(1.0f), mPos);
+
+    return translation * rotation;
+}
+
+
+
+void TestGrid::ControlWND() noexcept
+{
+    if (ImGui::Begin("Plane"))
     {
         ImGui::Text("Position");
         ImGui::SliderFloat("X", &mPos.x, -80.0f, 80.0f, "%.1f");

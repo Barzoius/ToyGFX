@@ -1,25 +1,23 @@
-#include "TestSquare.h"
-#include "Square.h"
-
-
+#include "TestContour.h"
+#include "CircleContour.h"
 #include "BindableObjects.h"
 #include "Shaders\Shader.h"
 
-
 #include <string>
+
 
 #include "imgui/imgui.h"
 
-TestSquare::TestSquare()
+TestContour::TestContour()
 {
     struct VERTEX
     {
         glm::vec3 pos;
-        //glm::vec3 col;
-        //glm::vec2 tex;
     };
 
-    auto model = Square::Make<VERTEX>();
+    auto model = CircleContour::Make<VERTEX>();
+
+    model.Treansform(glm::vec3(1.0f * 0.5f, 1.0f * 0.5f, 1.0f * 0.5f));
 
     AddBind(std::make_unique<VertexArray>());
 
@@ -35,18 +33,7 @@ TestSquare::TestSquare()
 
 }
 
-glm::mat4x4 TestSquare::GetTransformMatrix() const noexcept
-{
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), yaw, glm::vec3(0.0f, 0.0f, 1.0f)) *    // Yaw (Z-axis)
-    glm::rotate(glm::mat4(1.0f), pitch, glm::vec3(0.0f, 1.0f, 0.0f)) *  // Pitch (Y-axis)
-    glm::rotate(glm::mat4(1.0f), roll, glm::vec3(1.0f, 0.0f, 0.0f));    // Roll (X-axis)
-
-    glm::mat4 translation = glm::translate(glm::mat4(1.0f), mPos);
-
-    return translation * rotation;
-}
-
-void TestSquare::SetPosition(glm::vec3 pos) noexcept
+void TestContour::SetPosition(glm::vec3 pos) noexcept
 {
     mPos.x = pos.x;
     mPos.y = pos.y;
@@ -54,11 +41,22 @@ void TestSquare::SetPosition(glm::vec3 pos) noexcept
 
 }
 
-
-
-void TestSquare::ControlWND() noexcept
+glm::mat4x4 TestContour::GetTransformMatrix() const noexcept
 {
-    if (ImGui::Begin("Square"))
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), yaw, glm::vec3(0.0f, 0.0f, 1.0f)) *    // Yaw (Z-axis)
+        glm::rotate(glm::mat4(1.0f), pitch, glm::vec3(0.0f, 1.0f, 0.0f)) *  // Pitch (Y-axis)
+        glm::rotate(glm::mat4(1.0f), roll, glm::vec3(1.0f, 0.0f, 0.0f));    // Roll (X-axis)
+
+    glm::mat4 translation = glm::translate(glm::mat4(1.0f), mPos);
+
+    return translation * rotation;
+}
+
+
+
+void TestContour::ControlWND() noexcept
+{
+    if (ImGui::Begin("CircleContour"))
     {
         ImGui::Text("Position");
         ImGui::SliderFloat("X", &mPos.x, -80.0f, 80.0f, "%.1f");

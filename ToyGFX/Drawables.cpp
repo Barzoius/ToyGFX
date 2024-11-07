@@ -4,6 +4,8 @@
 #include <cassert>
 #include <typeinfo>
 
+//#define STB_IMAGE_IMPLEMENTATION
+//#include "stb_image.h"
 
 
 void Drawable::Draw(glm::mat4& viewMatrix, glm::mat4& projMatrix) const noexcept
@@ -44,6 +46,14 @@ void Drawable::Draw(glm::mat4& viewMatrix, glm::mat4& projMatrix) const noexcept
 
     glDrawElements(GL_TRIANGLES, (GLsizei)pElemBuffer->GetIndiciesCount(), GL_UNSIGNED_INT, 0);
 
+
+    //for weird circle contour
+    //glDrawElements(GL_TRIANGLE_STRIP, (GLsizei)pElemBuffer->GetIndiciesCount(), GL_UNSIGNED_INT, (void*)0); // Draw using indices
+
+    //glDrawElements(GL_QUADS, (GLsizei)pElemBuffer->GetIndiciesCount(), GL_UNSIGNED_INT, (void*)0); // Draw using indices
+
+    //glDrawElements(GL_LINES, (GLsizei)pElemBuffer->GetIndiciesCount(), GL_UNSIGNED_INT, (void*)0); // Draw using indices
+
     glBindVertexArray(0);
 
 }
@@ -71,4 +81,30 @@ ShaderSuite* Drawable::GetShader() const noexcept
 {
     return pShaderProgram.get();
 }
+
+//void Drawable::LoadTexture(const char* texturePath)
+//{
+//    glGenTextures(1, &texture);
+//    glBindTexture(GL_TEXTURE_2D, texture);
+//
+//    //	Desfasurarea imaginii pe orizontala/verticala in functie de parametrii de texturare;
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//
+//    // Modul in care structura de texeli este aplicata pe cea de pixeli;
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//
+//    // Incarcarea texturii si transferul datelor in obiectul textura; 
+//    int width, height, nrChannels;
+//
+//    unsigned char* image = stbi_load("container.jpg", &width, &height, &nrChannels, 0);
+//
+//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+//    glGenerateMipmap(GL_TEXTURE_2D);
+//
+//    // Eliberarea resurselor
+//    stbi_image_free(image);
+//    glBindTexture(GL_TEXTURE_2D, 0);
+//}
 
