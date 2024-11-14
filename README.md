@@ -8,6 +8,6 @@
 
 ## Instanced Indexed Rendering
 
-| 992000 quads |  3348000 quads |
+| 3348000 quads |  cool spiral |
 |---|---|
-|  ![](ToyGFX/Resources/ForReadMe/Insctanced_10.png) | ![](ToyGFX/Resources/ForReadMe/Instanced_15.png) |
+|  ![](ToyGFX/Resources/ForReadMe/Instanced_15.png) | ![](ToyGFX/Resources/ForReadMe/Spiral.gif) |

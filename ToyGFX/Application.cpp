@@ -142,33 +142,33 @@ void Application::Run()
     //    translations.push_back(translation);
     //}
 
-    int index = 0;
-    float offset = 0.1f;  // Optional offset
-    float spaceBetweenCubes = 2.0f; // Increase the space between cubes
+    //int index = 0;
+    //float offset = 0.1f;  // Optional offset
+    //float spaceBetweenCubes = 2.0f; // Increase the space between cubes
 
-    for (int z = -15; z < 15; z++)
-    {
-        for (int y = -15; y < 15; y++)
-        {
-            for (int x = -15; x < 15; x++)
-            {
-                glm::vec3 translation;
-                translation.x = x * spaceBetweenCubes + offset;
-                translation.y = y * spaceBetweenCubes + offset;
-                translation.z = z * spaceBetweenCubes + offset;
-                translations.push_back(translation);
-            }
-        }
-    }
+    //for (int z = -15; z < 15; z++)
+    //{
+    //    for (int y = -15; y < 15; y++)
+    //    {
+    //        for (int x = -15; x < 15; x++)
+    //        {
+    //            glm::vec3 translation;
+    //            translation.x = x * spaceBetweenCubes + offset;
+    //            translation.y = y * spaceBetweenCubes + offset;
+    //            translation.z = z * spaceBetweenCubes + offset;
+    //            translations.push_back(translation);
+    //        }
+    //    }
+    //}
 
 
     const int numObj = 1000;   
     const float r = 4.0f;        
     const float c = 0.1f;         
-    const float deltaT = 1.5f;    
+    const float deltaT = 2.0f;    
 
 
-/*    for (int i = 0; i < numObj; i++) {
+    for (int i = 0; i < numObj; i++) {
         float t = i * deltaT;  
         float x = r * cos(t); 
         float y = r * sin(t); 
@@ -176,7 +176,7 @@ void Application::Run()
 
         translations.push_back(glm::vec3(x, y, z));
     }
-       */ 
+       
  
 
 
