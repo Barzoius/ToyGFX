@@ -68,12 +68,15 @@ public:
         }
         
 
+
         std::vector<VERTEX> verts(vertices.size());
 
         for (size_t i = 0; i < vertices.size(); i++)
         {
             verts[i].pos = vertices[i];
         }
+
+
 
 
         std::vector<unsigned int> indices;
@@ -126,6 +129,6 @@ public:
     template <typename VERTEX>
     static IndexedTrigList<VERTEX> Make()
     {
-        return MakeTesselated<VERTEX>(40, 40);
+        return MakeTesselated<VERTEX>(1, 20);
     }
 };

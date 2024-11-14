@@ -219,6 +219,7 @@
     <None Include="Shaders\BaseVertex.glsl" />
     <None Include="Shaders\CSG.glsl" />
     <None Include="Shaders\Frag.glsl" />
+    <None Include="Shaders\InstanceVertex.glsl" />
     <None Include="Shaders\Vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

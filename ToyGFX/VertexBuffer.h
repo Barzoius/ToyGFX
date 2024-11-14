@@ -60,6 +60,11 @@ public:
         return sizeVERTEX;
     }
 
+    GLuint GetID()
+    {
+        return ID;
+    }
+
 private:
     GLuint ID;
     size_t sizeVERTEX;

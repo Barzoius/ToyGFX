@@ -257,5 +257,6 @@
     <None Include="Shaders\Vert.glsl" />
     <None Include="Shaders\CSG.glsl" />
     <None Include="Shaders\BaseVertex.glsl" />
+    <None Include="Shaders\InstanceVertex.glsl" />
   </ItemGroup>
 </Project>

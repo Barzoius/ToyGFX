@@ -4,6 +4,8 @@
 #include <cassert>
 #include <typeinfo>
 
+#include <iostream>
+
 //#define STB_IMAGE_IMPLEMENTATION
 //#include "stb_image.h"
 
@@ -80,6 +82,66 @@ void Drawable::AddShaderProgram(std::unique_ptr<ShaderSuite> ss) noexcept
 ShaderSuite* Drawable::GetShader() const noexcept
 {
     return pShaderProgram.get();
+}
+
+
+void Drawable::DrawIndexed(std::vector<glm::vec3>& translations, glm::mat4& viewMatrix, glm::mat4& projMatrix)
+{
+
+    if (pShaderProgram) {
+        pShaderProgram->use();
+    }
+
+    glm::mat4 model = this->GetTransformMatrix();
+
+    viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0.0f, -6.0f));
+
+
+    //MODEL
+
+    unsigned int modelLoc = glGetUniformLocation(this->GetShader()->GetID(), "model");
+
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+
+    //VIEW
+
+    unsigned int viewLocBox = glGetUniformLocation(this->GetShader()->GetID(), "view");
+
+    glUniformMatrix4fv(viewLocBox, 1, GL_FALSE, &viewMatrix[0][0]);
+
+
+    //PROJ
+
+    this->GetShader()->setMat4("projection", projMatrix);
+
+    for (auto& b : bindables)
+    {
+
+        b->Bind();
+    }
+
+
+
+    glEnableVertexAttribArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER, instanceVertexBuffer -> GetID()); 
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glVertexAttribDivisor(1, 1);
+
+
+    //glDrawElements(GL_TRIANGLES, (GLsizei)pElemBuffer->GetIndiciesCount(), GL_UNSIGNED_INT, 0);
+
+    glDrawElementsInstanced(
+        GL_TRIANGLES,                                     
+        (GLsizei)pElemBuffer->GetIndiciesCount(),         
+        GL_UNSIGNED_INT,                                  
+        0,                                               
+        (GLsizei)translations.size()                     
+    );
+
+    glBindVertexArray(0);
+
 }
 
 //void Drawable::LoadTexture(const char* texturePath)

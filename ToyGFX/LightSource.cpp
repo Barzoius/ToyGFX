@@ -26,7 +26,7 @@ LightSource::LightSource(float size)
     AddElementBuffer(std::make_unique<ElementBuffer>(model.indices));  // indices
 
     AddShaderProgram(std::make_unique<ShaderSuite>(std::initializer_list<std::pair<std::string_view, Shader::ShaderType>>{
-        {"Shaders/VertShader.glsl", Shader::ShaderType::VERTEX},
+        {"Shaders/InstanceVertex.glsl", Shader::ShaderType::VERTEX},
         { "Shaders/FragShader.glsl", Shader::ShaderType::FRAGMENT },
     }));
 
@@ -61,6 +61,11 @@ void LightSource::ControlWND() noexcept
         ImGui::SliderFloat("X", &mPos.x, -80.0f, 80.0f, "%.1f");
         ImGui::SliderFloat("Y", &mPos.y, -80.0f, 80.0f, "%.1f");
         ImGui::SliderFloat("Z", &mPos.z, -80.0f, 80.0f, "%.1f");
+
+        ImGui::Text("Orientation");
+        ImGui::SliderAngle("Roll", &roll, -180.0f, 180.0f);
+        ImGui::SliderAngle("Pitch", &pitch, -180.0f, 180.0f);
+        ImGui::SliderAngle("Yaw", &yaw, -180.0f, 180.0f);
 
     }
     ImGui::End();
