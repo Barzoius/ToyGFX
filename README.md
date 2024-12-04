@@ -11,3 +11,10 @@
 | 3348000 quads |  cool spiral |
 |---|---|
 |  ![](ToyGFX/Resources/ForReadMe/Instanced_15.png) | ![](ToyGFX/Resources/ForReadMe/Spiral.gif) |
+
+
+## Point Light 
+
+| Flat Shading |  Smooth Shading |
+|---|---|
+|  ![](ToyGFX/Resources/ForReadMe/flat.png) | ![](ToyGFX/Resources/ForReadMe/smooth.png) |

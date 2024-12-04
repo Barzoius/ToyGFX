@@ -7,14 +7,16 @@
 
 #include "imgui/imgui.h"
 
+
 TestSphere::TestSphere(float size)
 {
     struct VERTEX
     {
         glm::vec3 pos;
+        glm::vec3 col;
     };
 
-    auto model = Sphere::Make<VERTEX>();
+    auto model = Sphere::MakeColored<VERTEX>();
 
     model.Treansform(glm::vec3(size * 0.5f, size * 0.5f, size * 0.5f));
 

@@ -24,23 +24,27 @@ Application::Application()
         std::cout << "GLAD FAILED";
     }
 
-    box = new TestBox(0.5f);
-    light = new LightSource(2.0f);
-    light->SetPosition(glm::vec3(0.0f, 0.0f, -6.0f));
+    //box = new TestBox(0.5f);
+    light = new LightSource(1.0f);
+    light->SetPosition(glm::vec3(2.5f, -5.2f, -6.0f));
 
-    pyr = new TestPyramid(2.0f);
+    pyr = new TestPyramid(6.0f);
+    pyr->SetPosition(glm::vec3(0.0f, -4.6f, -6.0f));
 
-    ScreenPlane = new TestPlane(1.0f);
+    //ScreenPlane = new TestPlane(1.0f);
 
 
-    CC = new TestContour();
+    //CC = new TestContour();
 
-    GRID = new TestGrid(1.0f);
+    //GRID = new TestGrid(1.0f);
     //SQ = new TestSquare();
 
 
 
     glEnable(GL_DEPTH_TEST);
+
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_FRONT);
 }
 
 Application::~Application()
@@ -72,18 +76,18 @@ void Application::OnEvent()
 
 glm::vec3 randomColor()
 {
-    // Generate random float values between 0.0f and 1.0f
-    float r = static_cast<float>(rand()) / static_cast<float>(RAND_MAX); // Random value for Red
-    float g = static_cast<float>(rand()) / static_cast<float>(RAND_MAX); // Random value for Green
-    float b = static_cast<float>(rand()) / static_cast<float>(RAND_MAX); // Random value for Blue
+    // random float values between 0.0f and 1.0f
+    float r = static_cast<float>(rand()) / static_cast<float>(RAND_MAX); 
+    float g = static_cast<float>(rand()) / static_cast<float>(RAND_MAX); 
+    float b = static_cast<float>(rand()) / static_cast<float>(RAND_MAX); 
 
     return glm::vec3(r, g, b);
 }
 
-// Optionally, you can call this to seed the random number generator at the start of your program
+
 void seedRandom()
 {
-    std::srand(static_cast<unsigned int>(std::time(0)));  // Seed the random number generator with the current time
+    std::srand(static_cast<unsigned int>(std::time(0)));
 }
 
 void Application::Run()
@@ -106,11 +110,6 @@ void Application::Run()
 
     float squareSize = 2.0f / Divs;
 
-    //ShaderSuite ss = ShaderSuite(std::initializer_list<std::pair<std::string_view, Shader::ShaderType>>{
-    //    {"Shaders/BaseVertex.glsl", Shader::ShaderType::VERTEX},
-    //    { "Shaders/CSG.glsl", Shader::ShaderType::FRAGMENT }
-    //});
-
     //glm::vec2 res = glm::vec2(mWindow->GetHeight(), mWindow->GetWidth());
 
     std::vector<glm::vec3> translations;
@@ -124,58 +123,56 @@ void Application::Run()
 
     //for (int i = 0; i < numObjects; ++i)
     //{
-    //    // Adjust the radius to be incremented along with the loop index (i)
-    //    float radius = initialRadius + radiusIncrement * float(i); // Increment the radius as you go along the spiral
+    //    float radius = initialRadius + radiusIncrement * float(i);
 
-    //    // Angle for circular motion based on the current index (i)
+
     //    float theta = 2.0f * glm::pi<float>() * float(i) / numObjects;
 
     //    // Vertical height increases with each object
     //    float height = heightIncrement * float(i); // Vertical height, space them further apart
 
-    //    // Calculate the translation position of the object
     //    glm::vec3 translation;
-    //    translation.x = radius * cos(theta) + offset; // X position based on radius and angle
-    //    translation.y = radius * sin(theta) + offset; // Y position based on radius and angle
+    //    translation.x = radius * cos(theta) + offset; // X position
+    //    translation.y = radius * sin(theta) + offset; // Y position
     //    translation.z = height + offset; // Z position (height) increasing with each object
 
     //    translations.push_back(translation);
     //}
 
-    //int index = 0;
-    //float offset = 0.1f;  // Optional offset
-    //float spaceBetweenCubes = 2.0f; // Increase the space between cubes
+    int index = 0;
+    float offset = 0.1f;  
+    float spaceBetweenCubes = 2.0f; // Increase the space between cubes
 
-    //for (int z = -15; z < 15; z++)
-    //{
-    //    for (int y = -15; y < 15; y++)
-    //    {
-    //        for (int x = -15; x < 15; x++)
-    //        {
-    //            glm::vec3 translation;
-    //            translation.x = x * spaceBetweenCubes + offset;
-    //            translation.y = y * spaceBetweenCubes + offset;
-    //            translation.z = z * spaceBetweenCubes + offset;
-    //            translations.push_back(translation);
-    //        }
-    //    }
-    //}
-
-
-    const int numObj = 1000;   
-    const float r = 4.0f;        
-    const float c = 0.1f;         
-    const float deltaT = 2.0f;    
-
-
-    for (int i = 0; i < numObj; i++) {
-        float t = i * deltaT;  
-        float x = r * cos(t); 
-        float y = r * sin(t); 
-        float z = c * t;       
-
-        translations.push_back(glm::vec3(x, y, z));
+    for (int z = -10; z < 10; z++)
+    {
+        for (int y = -10; y < 10; y++)
+        {
+            for (int x = -10; x < 10; x++)
+            {
+                glm::vec3 translation;
+                translation.x = x * spaceBetweenCubes + offset;
+                translation.y = y * spaceBetweenCubes + offset;
+                translation.z = z * spaceBetweenCubes + offset;
+                translations.push_back(translation);
+            }
+        }
     }
+
+
+    //const int numObj = 1000;   
+    //const float r = 4.0f;        
+    //const float c = 0.1f;         
+    //const float deltaT = 2.0f;    
+
+
+    //for (int i = 0; i < numObj; i++) {
+    //    float t = i * deltaT;  
+    //    float x = r * cos(t); 
+    //    float y = r * sin(t); 
+    //    float z = c * t;       
+
+    //    translations.push_back(glm::vec3(x, y, z));
+    //}
        
  
 
@@ -199,9 +196,8 @@ void Application::Run()
 
 
     //box->InitInstancedData<decltype(*this)>(translations);
-     light->InitInstancedData<decltype(*this)>(translations);
+     //light->InitInstancedData<decltype(*this)>(translations);
 
-    
 
     while (!glfwWindowShouldClose(mWindow->GetWindow()))
     {
@@ -216,55 +212,38 @@ void Application::Run()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
+
         cameraView = mWindow->mCamera.GetMatrix();
         cameraView = glm::translate(cameraView, glm::vec3(0.0f, 0.0f, 1.0f));
 
         projection = glm::perspective(glm::radians(45.0f), (float)mWindow->GetWidth() / (float)mWindow->GetHeight(), 0.1f, 1000.0f);
+ 
 
-       /* ss.setVec2("uResolution", res);
-        ss.use();*/
-
-        
-
-       // box->ControlWND();
-        //box->Draw(cameraView, projection);
-        
-
-       // box->DrawIndexed(translations, cameraView, projection);
-        
-       // box->GetShader()->setVec3("Color", 0.0f, 0.0f, 1.0f);
-
-        
         light->ControlWND();
-        //light->Draw(cameraView, projection);
-        light->DrawIndexed(translations, cameraView, projection);
-        GLuint colorBlockIndex = glGetUniformBlockIndex(light->GetShader()->GetID(), "ColorBlock");
-        glUniformBlockBinding(light->GetShader()->GetID(), colorBlockIndex, 0);
-        glBindBufferBase(GL_UNIFORM_BUFFER, 0, colorBuffer);
-       // light->GetShader()->setVec3("Color", randomColor());
+        light->Draw(cameraView, projection);
+        //light->DrawIndexed(translations, cameraView, projection);
+        //GLuint colorBlockIndex = glGetUniformBlockIndex(light->GetShader()->GetID(), "ColorBlock");
+        //glUniformBlockBinding(light->GetShader()->GetID(), colorBlockIndex, 0);
+        //glBindBufferBase(GL_UNIFORM_BUFFER, 0, colorBuffer);
+         light->GetShader()->setVec3("Color", glm::vec3(1.0f, 1.0f, 1.0f));
 
 
 
-        //pyr->ControlWND();
-        //pyr->Draw(cameraView, projection);
-        //pyr->GetShader()->setVec3("Color", 0.478f, 0.522f, 1.0f);
-   
 
+        pyr->ControlWND();
+        pyr->Draw(cameraView, projection);
+        pyr->GetShader()->setVec3("Color", glm::vec3(1.0f, 0.3f, 0.1f));
+        pyr->GetShader()->setMat4("transforms", glm::mat4(1.0f));
+        pyr->GetShader()->setVec3("lightOrigin", light->GetPos());
+        pyr->GetShader()->setVec3("camOrigin", camera.GetPos());
 
-        //CC->ControlWND();
-        //CC->Draw(cameraView, projection);
-        //CC->GetShader()->setVec3("Color", 1.0f, 0.23f, 1.0f);
 
         
-
-
-        //GRID->ControlWND();
-        //GRID->Draw(cameraView, projection);
-        //GRID->GetShader()->setVec3("Color", 1.0f, 0.23f, 1.0f);
-
-        //SQ->ControlWND();
-        //SQ->Draw(cameraView, projection);
-        //SQ->GetShader()->setVec3("Color", 1.0f, 0.23f, 1.0f);
+        //if (ImGui::Begin("Stats"))
+        //{
+        //    ImGui::Text("App average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        //}
+        //ImGui::End();
 
  
 

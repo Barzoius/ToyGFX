@@ -12,9 +12,10 @@ LightSource::LightSource(float size)
     struct VERTEX
     {
         glm::vec3 pos;
+        glm::vec3 col;
     };
 
-    auto model = Sphere::Make<VERTEX>();
+    auto model = Sphere::MakeColored<VERTEX>();
 
     model.Treansform(glm::vec3(size * 0.5f, size * 0.5f, size * 0.5f));
 
@@ -26,8 +27,10 @@ LightSource::LightSource(float size)
     AddElementBuffer(std::make_unique<ElementBuffer>(model.indices));  // indices
 
     AddShaderProgram(std::make_unique<ShaderSuite>(std::initializer_list<std::pair<std::string_view, Shader::ShaderType>>{
-        {"Shaders/InstanceVertex.glsl", Shader::ShaderType::VERTEX},
-        { "Shaders/FragShader.glsl", Shader::ShaderType::FRAGMENT },
+        {"Shaders/PointLightVert.glsl", Shader::ShaderType::VERTEX},
+        { "Shaders/PointLightFrag.glsl", Shader::ShaderType::FRAGMENT },
+        //{"Shaders/Vert.glsl", Shader::ShaderType::VERTEX},
+        //{ "Shaders/FragShader.glsl", Shader::ShaderType::FRAGMENT },
     }));
 
 }
@@ -51,6 +54,11 @@ glm::mat4x4 LightSource::GetTransformMatrix() const noexcept
     return translation * rotation;
 }
 
+
+glm::vec3 LightSource::GetPos() const noexcept
+{
+    return mPos;
+}
 
 
 void LightSource::ControlWND() noexcept

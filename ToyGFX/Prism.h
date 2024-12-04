@@ -135,7 +135,7 @@ public:
     template <typename VERTEX>
     static IndexedTrigList <VERTEX> Make()
     {
-        return MakeTesselated<VERTEX>(15);
+        return MakeTesselated<VERTEX>(50);
     }
 
 };

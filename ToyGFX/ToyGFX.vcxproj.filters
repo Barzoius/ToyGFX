@@ -258,5 +258,9 @@
     <None Include="Shaders\CSG.glsl" />
     <None Include="Shaders\BaseVertex.glsl" />
     <None Include="Shaders\InstanceVertex.glsl" />
+    <None Include="Shaders\LightFrag.glsl" />
+    <None Include="Shaders\LightVert.glsl" />
+    <None Include="Shaders\PointLightFrag.glsl" />
+    <None Include="Shaders\PointLightVert.glsl" />
   </ItemGroup>
 </Project>

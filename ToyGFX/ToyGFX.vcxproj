@@ -220,6 +220,10 @@
     <None Include="Shaders\CSG.glsl" />
     <None Include="Shaders\Frag.glsl" />
     <None Include="Shaders\InstanceVertex.glsl" />
+    <None Include="Shaders\LightFrag.glsl" />
+    <None Include="Shaders\LightVert.glsl" />
+    <None Include="Shaders\PointLightVert.glsl" />
+    <None Include="Shaders\PointLightFrag.glsl" />
     <None Include="Shaders\Vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

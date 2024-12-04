@@ -27,7 +27,7 @@ TestPrism::TestPrism(float size)
     AddElementBuffer(std::make_unique<ElementBuffer>(model.indices));  // indices
 
     AddShaderProgram(std::make_unique<ShaderSuite>(std::initializer_list<std::pair<std::string_view, Shader::ShaderType>>{
-        {"Shaders/VertShader.glsl", Shader::ShaderType::VERTEX},
+        {"Shaders/Vert.glsl", Shader::ShaderType::VERTEX},
         { "Shaders/FragShader.glsl", Shader::ShaderType::FRAGMENT },
     }));
 

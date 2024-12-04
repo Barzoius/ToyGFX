@@ -19,6 +19,8 @@
 #include "TestContour.h"
 #include "TestSquare.h"
 #include "TestGrid.h"
+#include "TestPrism.h"
+
 
 
 
@@ -39,7 +41,9 @@ public:
 
     LightSource* light;
 
+
     TestPyramid* pyr;
+
 
     TestPlane* ScreenPlane;
     
@@ -57,10 +61,6 @@ private:
 
     Camera camera;
     Timer timer;
-
-   // Projection proj;
-
-
 
     
     std::unique_ptr<ShaderSuite> shaderProgram{};
