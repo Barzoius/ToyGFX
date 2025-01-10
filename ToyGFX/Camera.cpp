@@ -25,18 +25,20 @@ glm::vec3 Camera::GetPos()
 
 glm::mat4 Camera::GetViewMatrix()
 {
-    glm::vec3 N = camTarget;
+    glm::vec3 N = glm::normalize(camTarget);
     glm::normalize(N);
 
-    glm::vec3 U = glm::cross(camUp, camTarget);
+    glm::vec3 U = glm::normalize(glm::cross(camUp, camTarget));
     glm::normalize(U);
 
     glm::vec3 V = glm::cross(N, U);
 
-    return glm::mat4x4( U.x, U.y, U.z, -camPosition.x,
-                        V.x, V.y, V.z, -camPosition.y,
-                        N.x, N.y, N.z, -camPosition.z,
-                        0.0f, 0.0f, 0.0f, 1.0f );
+    return glm::mat4x4(
+        U.x, U.y, U.z, -glm::dot(U, camPosition),
+        V.x, V.y, V.z, -glm::dot(V, camPosition),
+        N.x, N.y, N.z, -glm::dot(N, camPosition),
+        0.0f, 0.0f, 0.0f, 1.0f
+    );
 }   
 
 void Camera::Update()
@@ -65,14 +67,12 @@ void Camera::processKeyInput(CAM_MOVEMENT dir, float dt)
     }
     if (dir == LEFT)
     {
-        glm::vec3 left = glm::cross(camTarget, camUp);
-        glm::normalize(left);
+        glm::vec3 left = glm::normalize(glm::cross(camTarget, camUp));
         camPosition += left * speed;
     }
     if (dir == RIGHT)
     {
-        glm::vec3 right = glm::cross(camUp, camTarget);
-        glm::normalize(right);
+        glm::vec3 right = glm::normalize(glm::cross(camUp, camTarget));
         camPosition += right * speed;
     }
     if (dir == UP)

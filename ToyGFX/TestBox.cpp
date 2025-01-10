@@ -13,6 +13,7 @@ TestBox::TestBox(float size)
     struct VERTEX
     {
         glm::vec3 pos;
+        glm::vec3 n;
     };
 
     auto model = Cube::Make<VERTEX>();
@@ -27,8 +28,8 @@ TestBox::TestBox(float size)
     AddElementBuffer(std::make_unique<ElementBuffer>(model.indices));  // indices
 
     AddShaderProgram(std::make_unique<ShaderSuite>(std::initializer_list<std::pair<std::string_view, Shader::ShaderType>>{
-        {"Shaders/InstanceVertex.glsl", Shader::ShaderType::VERTEX},
-        { "Shaders/FragShader.glsl", Shader::ShaderType::FRAGMENT },
+        {"Shaders/LightVert.glsl", Shader::ShaderType::VERTEX},
+        { "Shaders/LightFrag.glsl", Shader::ShaderType::FRAGMENT },
     }));
 
 }

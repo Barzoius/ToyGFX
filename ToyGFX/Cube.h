@@ -11,15 +11,31 @@ public:
         constexpr float side = 1.0f / 2.0f;
         //glm::vec3
         std::vector<glm::vec3> vertices;
+        std::vector<glm::vec3> normals;
 
         vertices.emplace_back(-side, -side, -side);
+        normals.emplace_back(0.0f, 0.0f, -1.0f);
+
         vertices.emplace_back(side, -side, -side); 
-        vertices.emplace_back(-side, side, -side);  
-        vertices.emplace_back(side, side, -side);  
+        normals.emplace_back(0.0f, 0.0f, -1.0f);
+
+        vertices.emplace_back(-side, side, -side);
+        normals.emplace_back(0.0f, 0.0f, -1.0f);
+
+        vertices.emplace_back(side, side, -side);
+        normals.emplace_back(0.0f, 0.0f, -1.0f);
+
         vertices.emplace_back(-side, -side, side); 
-        vertices.emplace_back(side, -side, side);  
+        normals.emplace_back(0.0f, 0.0f, -1.0f);
+
+        vertices.emplace_back(side, -side, side); 
+        normals.emplace_back(0.0f, 0.0f, -1.0f);
+
         vertices.emplace_back(-side, side, side); 
+        normals.emplace_back(0.0f, 0.0f, -1.0f);
+
         vertices.emplace_back(side, side, side); 
+        normals.emplace_back(0.0f, 0.0f, -1.0f);
 
 
         //std::vector<glm::vec3> colors =
@@ -41,6 +57,7 @@ public:
         for (size_t i = 0; i < vertices.size(); i++)
         {
             verts[i].pos = vertices[i];
+            verts[i].n = normals[i];
         }
 
         return{

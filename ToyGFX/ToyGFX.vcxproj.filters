@@ -120,6 +120,9 @@
     <ClCompile Include="TestGrid.cpp">
       <Filter>Source Files\Drawables</Filter>
     </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files\Drawables</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -249,6 +252,9 @@
       <Filter>Header Files\Primitives</Filter>
     </ClInclude>
     <ClInclude Include="TestGrid.h">
+      <Filter>Header Files\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
       <Filter>Header Files\Drawables</Filter>
     </ClInclude>
   </ItemGroup>

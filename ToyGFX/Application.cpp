@@ -24,9 +24,10 @@ Application::Application()
         std::cout << "GLAD FAILED";
     }
 
-    //box = new TestBox(0.5f);
+    box = new TestBox(5.5f);
     light = new LightSource(1.0f);
     light->SetPosition(glm::vec3(2.5f, -5.2f, -6.0f));
+
 
     pyr = new TestPyramid(6.0f);
     pyr->SetPosition(glm::vec3(0.0f, -4.6f, -6.0f));
@@ -38,6 +39,7 @@ Application::Application()
 
     //GRID = new TestGrid(1.0f);
     //SQ = new TestSquare();
+
 
 
 
@@ -219,23 +221,31 @@ void Application::Run()
         projection = glm::perspective(glm::radians(45.0f), (float)mWindow->GetWidth() / (float)mWindow->GetHeight(), 0.1f, 1000.0f);
  
 
-        light->ControlWND();
-        light->Draw(cameraView, projection);
+        //light->ControlWND();
+        //light->Draw(cameraView, projection);
         //light->DrawIndexed(translations, cameraView, projection);
         //GLuint colorBlockIndex = glGetUniformBlockIndex(light->GetShader()->GetID(), "ColorBlock");
         //glUniformBlockBinding(light->GetShader()->GetID(), colorBlockIndex, 0);
         //glBindBufferBase(GL_UNIFORM_BUFFER, 0, colorBuffer);
-         light->GetShader()->setVec3("Color", glm::vec3(1.0f, 1.0f, 1.0f));
+         //light->GetShader()->setVec3("Color", glm::vec3(1.0f, 1.0f, 1.0f));
 
 
+        box->ControlWND();
+        box->Draw(cameraView, projection);
+        box->GetShader()->setVec3("Color", glm::vec3(1.0f, 0.3f, 0.1f));
+        box->GetShader()->setMat4("transforms", glm::mat4(1.0f));
+        box->GetShader()->setVec3("lightOrigin", light->GetPos());
+        box->GetShader()->setVec3("camOrigin", camera.GetPos());
 
 
-        pyr->ControlWND();
-        pyr->Draw(cameraView, projection);
-        pyr->GetShader()->setVec3("Color", glm::vec3(1.0f, 0.3f, 0.1f));
-        pyr->GetShader()->setMat4("transforms", glm::mat4(1.0f));
-        pyr->GetShader()->setVec3("lightOrigin", light->GetPos());
-        pyr->GetShader()->setVec3("camOrigin", camera.GetPos());
+        //pyr->ControlWND();
+        //pyr->Draw(cameraView, projection);
+        //pyr->GetShader()->setVec3("Color", glm::vec3(1.0f, 0.3f, 0.1f));
+        //pyr->GetShader()->setMat4("transforms", glm::mat4(1.0f));
+        //pyr->GetShader()->setVec3("lightOrigin", light->GetPos());
+        //pyr->GetShader()->setVec3("camOrigin", camera.GetPos());
+
+
 
 
         

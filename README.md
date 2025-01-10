@@ -18,3 +18,8 @@
 | Flat Shading |  Smooth Shading |
 |---|---|
 |  ![](ToyGFX/Resources/ForReadMe/flat.png) | ![](ToyGFX/Resources/ForReadMe/smooth.png) |
+
+
+## Texture and Normal mapping
+
+<img src="ToyGFX/Resources/ForReadMe/normal.png" alt="Framework Diagram" style="width:100%;">

@@ -47,6 +47,9 @@ public:
 
     TestPlane* ScreenPlane;
     
+    TestPlane* Plane1;
+    TestPlane* Plane2;
+
 
     TestContour* CC;
 

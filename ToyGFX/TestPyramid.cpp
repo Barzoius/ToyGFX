@@ -50,7 +50,7 @@ glm::mat4x4 TestPyramid::GetTransformMatrix() const noexcept
 
     glm::mat4 translation = glm::translate(glm::mat4(1.0f), mPos);
 
-    return translation * rotation;
+    return translation  * rotation;
 }
 
 
